@@ -7,12 +7,14 @@ import {
 } from "react-router-dom";
 
 import Home from '../pages/Home/home';
+import Contact from '../pages/Contact/contact';
 
 const AppNavigation = () => {
     return (
         <Router>
             <Routes>
                 <Route exact path="/" element={<Home />} />
+                <Route path="/contact" element={<Contact />} />
             </Routes>
         </Router>
     )
