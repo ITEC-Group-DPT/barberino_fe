@@ -2,7 +2,7 @@ import React from 'react'
 
 const Home = () => {
   return (
-    <p>Barberino: Dao Ngu vl</p>
+    <p>Barberino: Dao ga zlll</p>
   )
 }
 
