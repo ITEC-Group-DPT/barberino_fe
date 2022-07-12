@@ -1,12 +1,7 @@
-import AppNavigation from './navigation/AppNavigation';
-import './App.css';
+import React from 'react';
 
 function App() {
-  return (
-    <>
-      <AppNavigation />
-    </>
-  );
+  return <div className="container">Home</div>;
 }
 
 export default App;
