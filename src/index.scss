@@ -1,0 +1,14 @@
+@import "./library";
+/// Block Element
+@mixin element($element) {
+  &__#{$element} {
+    @content;
+  }
+}
+
+/// Block Modifier
+@mixin modifier($modifier) {
+  &--#{$modifier} {
+    @content;
+  }
+}
