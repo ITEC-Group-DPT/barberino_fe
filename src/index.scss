@@ -5,10 +5,9 @@
     @content;
   }
 }
-
 /// Block Modifier
 @mixin modifier($modifier) {
   &--#{$modifier} {
     @content;
   }
-}
+} ;

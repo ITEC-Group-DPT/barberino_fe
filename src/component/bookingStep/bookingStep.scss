@@ -1,0 +1,47 @@
+@import "../../index.scss";
+
+.booking {
+  width: 70%;
+  min-height: 65vh;
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
+  position: relative;
+
+  @include element("header") {
+    display: flex;
+  }
+
+  @include element("stepTitle") {
+    flex: 1;
+    border: 0;
+    font-weight: 600;
+    padding: 15px 0;
+    background: #f6f2ea;
+    color: black;
+  }
+
+  @include element("content") {
+    text-align: center;
+  }
+
+  @include element("footer") {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+.button {
+  background: $orange;
+  border: 0;
+  color: white;
+  padding: 10px 18px;
+  width: min-content;
+  margin: 0 5px;
+  border-radius: 3px;
+  font-size: 16px;
+  cursor: pointer;
+
+  @include modifier("disabled") {
+    opacity: 0.65;
+  }
+}
