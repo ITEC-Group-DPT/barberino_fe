@@ -9,15 +9,15 @@ const activeStepStyle = {
 const BookingHeader = ({ data, setActive, active }) => {
   return (
     <div className="booking__header">
-      {data.map((step, index) => (
+      {data.map((title, index) => (
         <button
-          key={step?.title}
+          key={title}
           onClick={() => setActive(index)}
           className="booking__stepTitle"
-          style={active === index ? activeStepStyle : null}
+          style={active >= index ? activeStepStyle : null}
           type="button"
         >
-          {step.title}
+          {title}
         </button>
       ))}
     </div>

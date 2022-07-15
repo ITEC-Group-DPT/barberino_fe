@@ -1,22 +1,26 @@
-@import "../../index.scss";
+@import "../../library";
 
 .booking {
-  width: 70%;
-  min-height: 65vh;
+  align-self: center;
+  width: 65%;
+  min-height: 55vh;
   box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
   position: relative;
 
   @include element("header") {
     display: flex;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1) !important;
   }
 
   @include element("stepTitle") {
     flex: 1;
     border: 0;
     font-weight: 600;
-    padding: 15px 0;
+    padding: 10px 0;
     background: #f6f2ea;
     color: black;
+    font-size: 16px;
+    font-weight: 500;
   }
 
   @include element("content") {
@@ -34,10 +38,10 @@
   background: $orange;
   border: 0;
   color: white;
-  padding: 10px 18px;
+  padding: 8px 18px;
   width: min-content;
   margin: 0 5px;
-  border-radius: 3px;
+  border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
 

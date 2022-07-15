@@ -1,1 +1,14 @@
-$orange: #ffc009 !default
+$orange: #ffc009 !default;
+
+/// Block Element
+@mixin element($element) {
+  &__#{$element} {
+    @content;
+  }
+}
+/// Block Modifier
+@mixin modifier($modifier) {
+  &--#{$modifier} {
+    @content;
+  }
+} ;

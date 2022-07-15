@@ -1,13 +1,9 @@
-@import "./library";
-/// Block Element
-@mixin element($element) {
-  &__#{$element} {
-    @content;
-  }
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500&display=swap");
+
+h2,
+h3,
+p,
+input,
+button {
+  font-family: "Poppins";
 }
-/// Block Modifier
-@mixin modifier($modifier) {
-  &--#{$modifier} {
-    @content;
-  }
-} ;

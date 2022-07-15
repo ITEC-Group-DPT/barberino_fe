@@ -40,6 +40,8 @@
     "camelcase": ["error", { "ignoreDestructuring": true }],
     "testing-library/no-render-in-setup": "off",
     "jest/no-conditional-expect": 0,
-    "jsx-a11y/anchor-is-valid": 0
+    "jsx-a11y/anchor-is-valid": 0,
+    "react-hooks/exhaustive-deps": 0,
+    "no-alert": 0
   }
 }
