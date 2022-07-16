@@ -1,0 +1,28 @@
+.service {
+  display: flex;
+  justify-content: space-between;
+}
+
+.name {
+  font-weight: 500;
+}
+
+.interaction {
+  display: flex;
+}
+
+.duration {
+  margin-right: 30px;
+}
+
+.selectBtn {
+  border: none;
+  border-radius: 5px;
+
+  color: white;
+  cursor: pointer;
+  height: 45px;
+  align-self: center;
+  width: 85px;
+  font-size: 15px;
+}
