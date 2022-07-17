@@ -187,6 +187,8 @@ const StepDateTime = ({ selectedDateTime, setSelectedDateTime }) => {
   });
 
   useEffect(() => {
+    // request init API here
+
     setSelectedDateTime({
       date: initData.availableDates[0],
       time: Object.keys(initData.initTimeSlot)[0],
@@ -196,7 +198,7 @@ const StepDateTime = ({ selectedDateTime, setSelectedDateTime }) => {
 
   const handleDateChange = (e) => {
     const val = e.target.value;
-    // request api here
+    // request API here
 
     setData({
       ...data,
