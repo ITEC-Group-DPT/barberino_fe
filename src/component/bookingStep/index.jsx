@@ -31,15 +31,13 @@ const BookingStep = () => {
         alert("Please select at least 1 service");
         return;
       }
-      console.log("selected services:", selectedServices);
-    }
-    else if (activeStep === 2) {
+    } else if (activeStep === 2) {
       const bookingData = {
         information,
         selectedServices,
-        selectedDateTime
-      }
-      alert("Booking successfull (check console)")
+        selectedDateTime,
+      };
+      alert("Booking successfull (check console)");
       console.log(bookingData);
     }
     if (activeStep < stepper.length - 1)

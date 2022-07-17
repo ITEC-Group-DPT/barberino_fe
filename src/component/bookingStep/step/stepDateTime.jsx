@@ -33,20 +33,6 @@ const initData = {
         lastname: "kosako",
       },
     ],
-    "10:15": [
-      {
-        id: 4,
-        firstname: "Hehe",
-        lastname: "Boi",
-      },
-    ],
-    "10:30": [
-      {
-        id: 5,
-        firstname: "Ruby",
-        lastname: "Last",
-      },
-    ],
     "10:45": [
       {
         id: 6,
@@ -174,30 +160,6 @@ const dateChangeData = {
       lastname: "Last2",
     },
   ],
-  "14:15": [
-    {
-      id: 4,
-      firstname: "Ruby",
-      lastname: "Last1",
-    },
-    {
-      id: 5,
-      firstname: "Ruby2",
-      lastname: "Last2",
-    },
-  ],
-  "14:30": [
-    {
-      id: 4,
-      firstname: "Ruby",
-      lastname: "Last1",
-    },
-    {
-      id: 5,
-      firstname: "Ruby2",
-      lastname: "Last2",
-    },
-  ],
   "14:45": [
     {
       id: 4,
@@ -212,54 +174,60 @@ const dateChangeData = {
   ],
 };
 
-const StepDateTime = ({ selectedDateTime, setSelectedDateTime }) => {
-  const [currTimeSlot, setCurrTimeSlot] = useState(
-    initData.initTimeSlot
-  );
+// util
+// const getStylists = (timeSlot) => Object.values(timeSlot)[0];
+// const getTimes = (timeSlot) => Object.keys(timeSlot);
 
+const StepDateTime = ({ selectedDateTime, setSelectedDateTime }) => {
   const [data, setData] = useState({
     availableDates: initData.availableDates,
-    times: Object.keys(currTimeSlot),
-    stylists: Object.values(currTimeSlot)[0],
+    currTimeSlot: initData.initTimeSlot,
+    times: Object.keys(initData.initTimeSlot),
+    stylists: Object.values(initData.initTimeSlot)[0],
   });
 
   useEffect(() => {
     setSelectedDateTime({
       date: initData.availableDates[0],
-      time: Object.keys(currTimeSlot)[0],
-      stylistID: Object.values(currTimeSlot)[0][0].id,
+      time: Object.keys(initData.initTimeSlot)[0],
+      stylistID: Object.values(initData.initTimeSlot)[0][0].id,
     });
   }, []);
 
   const handleDateChange = (e) => {
+    const val = e.target.value;
     // request api here
 
-    setCurrTimeSlot(dateChangeData);
     setData({
       ...data,
+      currTimeSlot: dateChangeData,
       times: Object.keys(dateChangeData),
       stylists: Object.values(dateChangeData)[0],
     });
-
     setSelectedDateTime({
-      ...selectedDateTime,
-      date: e.target.value,
+      date: val,
+      time: Object.keys(dateChangeData)[0],
+      stylistID: Object.values(dateChangeData)[0][0].id,
     });
   };
 
   const handleTimeChange = (e) => {
-    setData({ ...data, stylists: currTimeSlot[e.target.value] });
+    const val = e.target.value;
 
+    setData({ ...data, stylists: data.currTimeSlot[val] });
     setSelectedDateTime({
       ...selectedDateTime,
-      time: e.target.value,
+      time: val,
+      stylistID: data.currTimeSlot[val][0].id,
     });
   };
 
   const handleStylistChange = (e) => {
+    const val = e.target.value;
+
     setSelectedDateTime({
       ...selectedDateTime,
-      stylist: e.target.value,
+      stylistID: val,
     });
   };
 
