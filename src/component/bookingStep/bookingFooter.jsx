@@ -25,7 +25,7 @@ const BookingFooter = ({ handlePrev, handleNext, active, data }) => {
         className={buttonClass("next")}
         type="button"
       >
-        Next
+        {active < data.length - 1 ? ('Next') : ('Finish')}
       </button>
     </div>
   );

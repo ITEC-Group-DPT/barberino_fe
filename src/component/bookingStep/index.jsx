@@ -4,6 +4,7 @@ import BookingHeader from "./bookingHeader";
 import BookingFooter from "./bookingFooter";
 import StepInfo from "./step/stepInfo";
 import StepService from "./step/stepService";
+import StepDateTime from "./step/stepDateTime";
 import { validateStepOne } from "./validators";
 
 const stepper = ["Information", "Services", "DateTime"];
@@ -11,6 +12,7 @@ const BookingStep = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [information, setInformation] = useState();
   const [selectedServices, setSelectedServices] = useState([]);
+  const [selectedDateTime, setSelectedDateTime] = useState({});
 
   const handlePrev = () => {
     if (activeStep > 0) setActiveStep(activeStep - 1);
@@ -31,6 +33,15 @@ const BookingStep = () => {
       }
       console.log("selected services:", selectedServices);
     }
+    else if (activeStep === 2) {
+      const bookingData = {
+        information,
+        selectedServices,
+        selectedDateTime
+      }
+      alert("Booking successfull (check console)")
+      console.log(bookingData);
+    }
     if (activeStep < stepper.length - 1)
       setActiveStep(activeStep + 1);
   };
@@ -49,7 +60,12 @@ const BookingStep = () => {
           />
         );
       case 2:
-        return <p>Step 3</p>;
+        return (
+          <StepDateTime
+            selectedDateTime={selectedDateTime}
+            setSelectedDateTime={setSelectedDateTime}
+          />
+        );
       default:
         return null;
     }
