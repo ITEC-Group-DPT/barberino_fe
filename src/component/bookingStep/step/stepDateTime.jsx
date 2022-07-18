@@ -251,7 +251,7 @@ const StepDateTime = ({ selectedDateTime, setSelectedDateTime }) => {
         </select>
       </label>
 
-      <div className="row" style={{ marginTop: "50px" }}>
+      <div className="row">
         <label className="label" htmlFor="time">
           <p className="label-text">Time</p>
           <select

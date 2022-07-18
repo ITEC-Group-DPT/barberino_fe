@@ -1,7 +1,7 @@
 @import "../../../library";
 
 .info {
-  padding-top: 25px;
+  padding-top: 50px;
   padding-left: 15px;
 
   @include element("input") {
@@ -29,11 +29,13 @@
 }
 
 .services {
-  padding: 25px 25px 80px 25px;
+  padding: 25px;
+  height: 30vh;
+  overflow: scroll;
 }
 
 .datetime {
-  padding: 25px 50px;
+  padding: 10px 50px;
 }
 
 .label {

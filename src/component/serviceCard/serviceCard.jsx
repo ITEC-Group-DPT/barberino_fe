@@ -6,7 +6,7 @@ const SelectBtn = ({ selected = false, handleClick }) => {
     <button
       type="button"
       onClick={handleClick}
-      className="selectBtn"
+      className="serviceCard__button"
       style={{ background: selected ? "#ffc009" : "#6c757d" }}
     >
       {selected ? "Selected" : "Select"}
@@ -27,10 +27,10 @@ const ServiceCard = ({
   };
 
   return (
-    <div className="service">
-      <p className="name">{name}</p>
-      <div className="interaction">
-        <p className="duration">{duration}</p>
+    <div className="serviceCard">
+      <p className="serviceCard___name">{name}</p>
+      <div className="serviceCard__interaction">
+        <p className="serviceCard__duration">{duration}</p>
         <SelectBtn selected={selected} handleClick={handleClick} />
       </div>
     </div>
