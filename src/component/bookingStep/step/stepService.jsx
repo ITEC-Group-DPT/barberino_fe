@@ -1,53 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ServiceCard from "../../serviceCard/serviceCard";
 import "./step.scss";
-
-const services = [
-  {
-    name: "Hair Cut",
-    duration: "20 min",
-  },
-  {
-    name: "Hair Styling",
-    duration: "15 min",
-  },
-  {
-    name: "Hair Triming",
-    duration: "10 min",
-  },
-  {
-    name: "Clean Shaving",
-    duration: "20 min",
-  },
-  {
-    name: "Beard Triming",
-    duration: "15 min",
-  },
-  {
-    name: "Smooth Shave",
-    duration: "20 min",
-  },
-  {
-    name: "White Facial",
-    duration: "15 min",
-  },
-  {
-    name: "Face Cleaning",
-    duration: "20 min",
-  },
-  {
-    name: "Bright Tuning",
-    duration: "20 min",
-  },
-];
+import { getServicesAPI } from "../../../api/bookingApi";
 
 const StepService = ({ selectedServices, setSelectedServices }) => {
-  const handleSelect = (name, selected) => {
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    getServicesAPI().then((response) => {
+      if (response.status === 200) {
+        setServices(response.data);
+      }
+    });
+  }, []);
+
+  const handleSelect = (id, selected) => {
     if (selected === true)
-      setSelectedServices([...selectedServices, name]);
+      setSelectedServices([...selectedServices, id]);
     else {
       setSelectedServices(
-        selectedServices.filter((item) => item !== name)
+        selectedServices.filter((item) => item !== id)
       );
     }
   };
@@ -55,10 +27,11 @@ const StepService = ({ selectedServices, setSelectedServices }) => {
     <div className="services">
       {services.map((service) => (
         <ServiceCard
-          key={service.name}
+          key={service.id}
+          id={service.id}
           name={service.name}
           duration={service.duration}
-          initSelect={selectedServices.includes(service.name)}
+          initSelect={selectedServices.includes(service.id)}
           handleSelect={handleSelect}
         />
       ))}

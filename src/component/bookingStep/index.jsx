@@ -60,6 +60,7 @@ const BookingStep = () => {
       case 2:
         return (
           <StepDateTime
+            selectedServices={selectedServices}
             selectedDateTime={selectedDateTime}
             setSelectedDateTime={setSelectedDateTime}
           />

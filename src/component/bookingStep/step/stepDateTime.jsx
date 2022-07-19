@@ -178,7 +178,7 @@ const dateChangeData = {
 // const getStylists = (timeSlot) => Object.values(timeSlot)[0];
 // const getTimes = (timeSlot) => Object.keys(timeSlot);
 
-const StepDateTime = ({ selectedDateTime, setSelectedDateTime }) => {
+const StepDateTime = ({ selectedServices, selectedDateTime, setSelectedDateTime }) => {
   const [data, setData] = useState({
     availableDates: initData.availableDates,
     currTimeSlot: initData.initTimeSlot,
