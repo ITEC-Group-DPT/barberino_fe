@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React, { useState } from "react";
 import "./bookingForm.scss";
 import BookingHeader from "./bookingHeader";
@@ -6,13 +7,14 @@ import StepInfo from "./step/stepInfo";
 import StepService from "./step/stepService";
 import StepDateTime from "./step/stepDateTime";
 import { validateStepOne } from "./validators";
+import { createBookingAPI } from "../../api/bookingApi";
 
 const stepper = ["Information", "Services", "DateTime"];
 const BookingStep = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [information, setInformation] = useState();
-  const [selectedServices, setSelectedServices] = useState([]);
-  const [selectedDateTime, setSelectedDateTime] = useState({});
+  const [selServices, setSelServices] = useState([]);
+  const [selDateTime, setSelDateTime] = useState({});
 
   const handlePrev = () => {
     if (activeStep > 0) setActiveStep(activeStep - 1);
@@ -27,18 +29,27 @@ const BookingStep = () => {
         return;
       }
     } else if (activeStep === 1) {
-      if (selectedServices.length === 0) {
+      if (selServices.length === 0) {
         alert("Please select at least 1 service");
         return;
       }
     } else if (activeStep === 2) {
       const bookingData = {
-        information,
-        selectedServices,
-        selectedDateTime,
+        phone: information.phone,
+        name: information.name,
+        email: information.email,
+        selected_services: selServices,
+        selected_date: selDateTime.date,
+        selected_time: selDateTime.time,
+        selected_employee: selDateTime.stylistID,
       };
-      alert("Booking successfull (check console)");
-      console.log(bookingData);
+
+      createBookingAPI(bookingData).then((response) => {
+        if (response.status === 200) {
+          alert("Booking successfully (check console)");
+          console.log(bookingData);
+        }
+      });
     }
     if (activeStep < stepper.length - 1)
       setActiveStep(activeStep + 1);
@@ -53,16 +64,16 @@ const BookingStep = () => {
       case 1:
         return (
           <StepService
-            selectedServices={selectedServices}
-            setSelectedServices={setSelectedServices}
+            selServices={selServices}
+            setSelServices={setSelServices}
           />
         );
       case 2:
         return (
           <StepDateTime
-            selectedServices={selectedServices}
-            selectedDateTime={selectedDateTime}
-            setSelectedDateTime={setSelectedDateTime}
+            selServices={selServices}
+            selDateTime={selDateTime}
+            setSelDateTime={setSelDateTime}
           />
         );
       default:

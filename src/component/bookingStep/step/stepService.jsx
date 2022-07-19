@@ -3,7 +3,7 @@ import ServiceCard from "../../serviceCard/serviceCard";
 import "./step.scss";
 import { getServicesAPI } from "../../../api/bookingApi";
 
-const StepService = ({ selectedServices, setSelectedServices }) => {
+const StepService = ({ selServices, setSelServices }) => {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
@@ -16,10 +16,10 @@ const StepService = ({ selectedServices, setSelectedServices }) => {
 
   const handleSelect = (id, selected) => {
     if (selected === true)
-      setSelectedServices([...selectedServices, id]);
+      setSelServices([...selServices, id]);
     else {
-      setSelectedServices(
-        selectedServices.filter((item) => item !== id)
+      setSelServices(
+        selServices.filter((item) => item !== id)
       );
     }
   };
@@ -31,7 +31,7 @@ const StepService = ({ selectedServices, setSelectedServices }) => {
           id={service.id}
           name={service.name}
           duration={service.duration}
-          initSelect={selectedServices.includes(service.id)}
+          isSelect={selServices.includes(service.id)}
           handleSelect={handleSelect}
         />
       ))}

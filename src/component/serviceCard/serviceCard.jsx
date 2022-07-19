@@ -18,13 +18,11 @@ const ServiceCard = ({
   id,
   name,
   duration,
-  initSelect,
+  isSelect,
   handleSelect,
 }) => {
-  const [selected, setSelected] = useState(initSelect);
   const handleClick = () => {
-    setSelected(!selected);
-    handleSelect(id, !selected);
+    handleSelect(id, !isSelect);
   };
 
   return (
@@ -32,7 +30,7 @@ const ServiceCard = ({
       <p className="serviceCard___name">{name}</p>
       <div className="serviceCard__interaction">
         <p className="serviceCard__duration">{`${duration} min`}</p>
-        <SelectBtn selected={selected} handleClick={handleClick} />
+        <SelectBtn selected={isSelect} handleClick={handleClick} />
       </div>
     </div>
   );

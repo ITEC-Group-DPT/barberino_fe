@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import axios from "axios";
 
 const API_URL = "http://barberinobe.phuhanh.com.vn/api/";
@@ -14,7 +15,7 @@ const getDateTimeAPI = (selectedServices) => {
   const services = JSON.stringify(selectedServices);
   const params = {
     option: "getDateTime",
-    selectedServices: services,
+    selected_services: services,
   };
 
   return axios.get(`${API_URL}booking.php`, { params });
@@ -25,7 +26,7 @@ const getTimeByDateAPI = (date, selectedServices) => {
   const params = {
     option: "getTimeByDate",
     appointmentDate: date,
-    selectedServices: services,
+    selected_services: services,
   };
 
   return axios.get(`${API_URL}booking.php`, { params });
