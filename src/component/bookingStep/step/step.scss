@@ -24,10 +24,6 @@
   }
 }
 
-.row {
-  display: flex;
-}
-
 .services {
   padding: 25px;
   height: 30vh;
@@ -36,32 +32,36 @@
 
 .datetime {
   padding: 10px 50px;
+
+  @include element("label") {
+    flex: 1;
+
+    &:first-child {
+      margin-right: 60px;
+    }
+  }
+
+  @include element("select") {
+    border: 2px solid $orange;
+    border-radius: 5px;
+    background: #f6f2ea;
+    padding: 15px 20px;
+    font-size: 16px;
+    color: #563b4c;
+    font-weight: 500;
+    width: 100%;
+
+    &:focus-visible {
+      outline: 0;
+    }
+  }
 }
 
-.label {
-  flex: 1;
-}
-
-.label:first-child {
-  margin-right: 60px;
+.row {
+  display: flex;
 }
 
 .label-text {
   text-align: start;
   font-weight: 500;
-}
-
-.select {
-  border: 2px solid $orange;
-  border-radius: 5px;
-  background: #f6f2ea;
-  padding: 15px 20px;
-  font-size: 16px;
-  color: #563b4c;
-  font-weight: 500;
-  width: 100%;
-
-  &:focus-visible {
-    outline: 0;
-  }
 }

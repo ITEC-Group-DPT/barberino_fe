@@ -62,6 +62,7 @@ const BookingStep = () => {
         }
       });
     }
+
     if (activeStep < stepper.length - 1)
       setActiveStep(activeStep + 1);
   };

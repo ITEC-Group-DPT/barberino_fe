@@ -15,7 +15,7 @@ const StepDateTime = ({
   const [stylists, setStylists] = useState([]);
 
   useEffect(() => {
-    getDateTime(selServices)
+    getDateTime(selServices);
   }, []);
 
   useEffect(() => {
@@ -58,11 +58,13 @@ const StepDateTime = ({
 
   const handleTimeChange = (e) => {
     const val = e.target.value;
+
     setSelDateTime({ ...selDateTime, time: val });
   };
 
   const handleStylistChange = (e) => {
     const val = e.target.value;
+
     setSelDateTime({
       ...selDateTime,
       stylistID: val,
@@ -71,64 +73,58 @@ const StepDateTime = ({
 
   return (
     <div className="datetime">
-      <label className="label" htmlFor="date">
+      <label className="datetime__label" htmlFor="date">
         <p className="label-text">Date</p>
         <select
           name="date"
           id="date"
-          className="select"
+          className="datetime__select"
           value={selDateTime?.date || ""}
           onChange={handleDateChange}
         >
-          {availDates.length === 0
-            ? ""
-            : availDates.map((date) => (
-                <option key={date} value={date}>
-                  {date}
-                </option>
-              ))}
+          {availDates.length !== 0 &&
+            availDates.map((date) => (
+              <option key={date} value={date}>
+                {date}
+              </option>
+            ))}
         </select>
       </label>
 
       <div className="row">
-        <label className="label" htmlFor="time">
+        <label className="datetime__label" htmlFor="time">
           <p className="label-text">Time</p>
           <select
             name="time"
             id="time"
-            className="select"
+            className="datetime__select"
             value={selDateTime?.time || ""}
             onChange={handleTimeChange}
           >
-            {Object.keys(timeSlot).length === 0
-              ? ""
-              : Object.keys(timeSlot).map((time) => (
-                  <option key={time} value={time}>
-                    {time}
-                  </option>
-                ))}
+            {Object.keys(timeSlot).length !== 0 &&
+              Object.keys(timeSlot).map((time) => (
+                <option key={time} value={time}>
+                  {time}
+                </option>
+              ))}
           </select>
         </label>
 
-        <label className="label" htmlFor="stylist">
+        <label className="datetime__label" htmlFor="stylist">
           <p className="label-text">Stylist</p>
           <select
             name="stylist"
             id="stylist"
-            className="select"
+            className="datetime__select"
             value={selDateTime?.stylistID || ""}
             onChange={handleStylistChange}
           >
-            {stylists === undefined
-              ? ""
-              : stylists.map((stylist) => {
-                  const stylistName = `${stylist.firstname} ${stylist.lastname}`;
-                  return (
-                    <option key={stylist.id} value={stylist.id}>
-                      {stylistName}
-                    </option>
-                  );
-                })}
+            {stylists !== undefined &&
+              stylists.map((stylist) => (
+                <option key={stylist.id} value={stylist.id}>
+                  {stylist.firstname} {stylist.lastname}
+                </option>
+              ))}
           </select>
         </label>
       </div>

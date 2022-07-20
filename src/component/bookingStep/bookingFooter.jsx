@@ -7,7 +7,7 @@ const BookingFooter = ({ handlePrev, handleNext, active, data }) => (
       className={active > 0 ? "button" : "button button--disabled"}
       type="button"
     >
-      Previous
+      Back
     </button>
     <button onClick={handleNext} className="button" type="button">
       {active < data.length - 1 ? "Next" : "Finish"}
