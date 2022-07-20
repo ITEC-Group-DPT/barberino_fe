@@ -6,7 +6,6 @@ import BookingFooter from "./bookingFooter";
 import StepInfo from "./step/stepInfo";
 import StepService from "./step/stepService";
 import StepDateTime from "./step/stepDateTime";
-import { validateStepOne } from "./validators";
 import { createBookingAPI } from "../../api/bookingApi";
 
 const stepper = ["Information", "Services", "DateTime"];
@@ -16,13 +15,24 @@ const BookingStep = () => {
   const [selServices, setSelServices] = useState([]);
   const [selDateTime, setSelDateTime] = useState({});
 
+  const validateStepOne = () => {
+    const fields = ["email", "phone", "name"];
+
+    const indexOf = fields.findIndex(
+      (data) =>
+        information?.[data] == null || information[data] === ""
+    );
+
+    return indexOf === -1;
+  };
+
   const handlePrev = () => {
     if (activeStep > 0) setActiveStep(activeStep - 1);
   };
 
   const handleNext = () => {
     if (activeStep === 0) {
-      const isValid = validateStepOne();
+      const isValid = validateStepOne(information);
 
       if (isValid === false) {
         alert("Please input all field");
@@ -35,10 +45,8 @@ const BookingStep = () => {
       }
     } else if (activeStep === 2) {
       const bookingData = {
-        phone: information.phone,
-        name: information.name,
-        email: information.email,
-        selected_services: selServices,
+        ...information,
+        selected_services: JSON.stringify(selServices),
         selected_date: selDateTime.date,
         selected_time: selDateTime.time,
         selected_employee: selDateTime.stylistID,
@@ -46,8 +54,11 @@ const BookingStep = () => {
 
       createBookingAPI(bookingData).then((response) => {
         if (response.status === 200) {
-          alert("Booking successfully (check console)");
-          console.log(bookingData);
+          if (response.data === "success") {
+            alert("Booking successfully");
+          } else {
+            alert("Conflicted! Please select new datetime");
+          }
         }
       });
     }

@@ -10,81 +10,47 @@ const StepDateTime = ({
   selDateTime,
   setSelDateTime,
 }) => {
-  const [data, setData] = useState({});
+  const [availDates, setAvailDates] = useState([]);
+  const [timeSlot, setTimeSlot] = useState({});
+  const [stylists, setStylists] = useState([]);
 
   useEffect(() => {
-    getDateTimeAPI(selServices).then((response) => {
+    getDateTime(selServices)
+  }, []);
+
+  useEffect(() => {
+    if (Object.keys(selDateTime).length === 0) return;
+    setStylists(timeSlot[selDateTime.time]);
+  }, [selDateTime]);
+
+  const getDateTime = (services) => {
+    getDateTimeAPI(services).then((response) => {
       if (response.status === 200) {
-        console.log(response.data);
-        const { availableDates, initTimeSlot } = response.data;
+        const res = response.data;
 
-        if (initTimeSlot.length === 0) {
-          // ran out of stylists working hour
-          // render next day
-
-          // newDates.push(Date().getDate() + 7)
-          // console.log(newDates);
-
-          getTimeByDateAPI(availableDates[1], selServices).then(
-            (response1) => {
-              if (response1.status === 200) {
-                const timeSlot = response1.data;
-                const times = Object.keys(timeSlot);
-                const stylists = Object.values(timeSlot)[0];
-
-                setData({
-                  ...data,
-                  currTimeSlot: timeSlot,
-                  times,
-                  stylists,
-                });
-                setSelDateTime({
-                  date: availableDates[1],
-                  time: times[0],
-                  stylistID: stylists[0].id,
-                });
-              }
-            }
-          );
-        } else {
-          const times = Object.keys(initTimeSlot);
-          const stylists = Object.values(initTimeSlot)[0];
-
-          setData({
-            availableDates,
-            currTimeSlot: initTimeSlot,
-            times,
-            stylists,
-          });
-          setSelDateTime({
-            date: availableDates[0],
-            time: times[0],
-            stylistID: stylists[0].id,
-          });
-        }
+        setAvailDates(res.availableDates);
+        setTimeSlot(res.timeSlot);
+        setSelDateTime({
+          date: res.availableDates[0],
+          time: Object.keys(res.timeSlot)[0],
+          stylistID: Object.values(res.timeSlot)[0][0].id,
+        });
       }
     });
-  }, []);
+  };
 
   const handleDateChange = (e) => {
     const val = e.target.value;
 
     getTimeByDateAPI(val, selServices).then((response) => {
       if (response.status === 200) {
-        const timeSlot = response.data;
-        const times = Object.keys(timeSlot);
-        const stylists = Object.values(timeSlot)[0];
+        const res = response.data;
 
-        setData({
-          ...data,
-          currTimeSlot: timeSlot,
-          times,
-          stylists,
-        });
+        setTimeSlot(res);
         setSelDateTime({
           date: val,
-          time: times[0],
-          stylistID: stylists[0].id,
+          time: Object.keys(res)[0],
+          stylistID: Object.values(res)[0][0].id,
         });
       }
     });
@@ -92,18 +58,11 @@ const StepDateTime = ({
 
   const handleTimeChange = (e) => {
     const val = e.target.value;
-
-    setData({ ...data, stylists: data.currTimeSlot[val] });
-    setSelDateTime({
-      ...selDateTime,
-      time: val,
-      stylistID: data.currTimeSlot[val][0].id,
-    });
+    setSelDateTime({ ...selDateTime, time: val });
   };
 
   const handleStylistChange = (e) => {
     const val = e.target.value;
-
     setSelDateTime({
       ...selDateTime,
       stylistID: val,
@@ -121,9 +80,9 @@ const StepDateTime = ({
           value={selDateTime?.date || ""}
           onChange={handleDateChange}
         >
-          {Object.keys(data).length === 0
+          {availDates.length === 0
             ? ""
-            : data.availableDates.map((date) => (
+            : availDates.map((date) => (
                 <option key={date} value={date}>
                   {date}
                 </option>
@@ -141,9 +100,9 @@ const StepDateTime = ({
             value={selDateTime?.time || ""}
             onChange={handleTimeChange}
           >
-            {Object.keys(data).length === 0
+            {Object.keys(timeSlot).length === 0
               ? ""
-              : data.times.map((time) => (
+              : Object.keys(timeSlot).map((time) => (
                   <option key={time} value={time}>
                     {time}
                   </option>
@@ -160,9 +119,9 @@ const StepDateTime = ({
             value={selDateTime?.stylistID || ""}
             onChange={handleStylistChange}
           >
-            {Object.keys(data).length === 0
+            {stylists === undefined
               ? ""
-              : data.stylists.map((stylist) => {
+              : stylists.map((stylist) => {
                   const stylistName = `${stylist.firstname} ${stylist.lastname}`;
                   return (
                     <option key={stylist.id} value={stylist.id}>

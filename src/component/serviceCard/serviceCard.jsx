@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./serviceCard.scss";
 
 const SelectBtn = ({ selected = false, handleClick }) => {
