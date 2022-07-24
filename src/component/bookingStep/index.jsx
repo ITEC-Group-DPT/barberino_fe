@@ -1,16 +1,30 @@
+/* eslint-disable camelcase */
 import React, { useState } from "react";
 import "./bookingForm.scss";
 import BookingHeader from "./bookingHeader";
 import BookingFooter from "./bookingFooter";
 import StepInfo from "./step/stepInfo";
 import StepService from "./step/stepService";
-import { validateStepOne } from "./validators";
+import StepDateTime from "./step/stepDateTime";
+import { createBookingAPI } from "../../api/bookingApi";
 
 const stepper = ["Information", "Services", "DateTime"];
 const BookingStep = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [information, setInformation] = useState();
-  const [selectedServices, setSelectedServices] = useState([]);
+  const [selServices, setSelServices] = useState([]);
+  const [selDateTime, setSelDateTime] = useState({});
+
+  const validateStepOne = () => {
+    const fields = ["email", "phone", "name"];
+
+    const indexOf = fields.findIndex(
+      (data) =>
+        information?.[data] == null || information[data] === ""
+    );
+
+    return indexOf === -1;
+  };
 
   const handlePrev = () => {
     if (activeStep > 0) setActiveStep(activeStep - 1);
@@ -25,12 +39,31 @@ const BookingStep = () => {
         return;
       }
     } else if (activeStep === 1) {
-      if (selectedServices.length === 0) {
+      if (selServices.length === 0) {
         alert("Please select at least 1 service");
         return;
       }
-      console.log("selected services:", selectedServices);
+    } else if (activeStep === 2) {
+      const bookingData = {
+        ...information,
+        selected_services: JSON.stringify(selServices),
+        selected_date: selDateTime.date,
+        selected_time: selDateTime.time,
+        selected_employee: selDateTime.stylistID,
+      };
+
+      createBookingAPI(bookingData).then((response) => {
+        if (response.status === 200) {
+          if (response.data === "success") {
+            alert("Booking successfully");
+            window.location.reload();
+          } else {
+            alert("Conflicted! Please select new datetime");
+          }
+        }
+      });
     }
+
     if (activeStep < stepper.length - 1)
       setActiveStep(activeStep + 1);
   };
@@ -44,12 +77,18 @@ const BookingStep = () => {
       case 1:
         return (
           <StepService
-            selectedServices={selectedServices}
-            setSelectedServices={setSelectedServices}
+            selServices={selServices}
+            setSelServices={setSelServices}
           />
         );
       case 2:
-        return <p>Step 3</p>;
+        return (
+          <StepDateTime
+            selServices={selServices}
+            selDateTime={selDateTime}
+            setSelDateTime={setSelDateTime}
+          />
+        );
       default:
         return null;
     }

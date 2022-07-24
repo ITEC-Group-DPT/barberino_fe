@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./serviceCard.scss";
 
 const SelectBtn = ({ selected = false, handleClick }) => {
@@ -6,7 +6,7 @@ const SelectBtn = ({ selected = false, handleClick }) => {
     <button
       type="button"
       onClick={handleClick}
-      className="selectBtn"
+      className="serviceCard__button"
       style={{ background: selected ? "#ffc009" : "#6c757d" }}
     >
       {selected ? "Selected" : "Select"}
@@ -15,23 +15,22 @@ const SelectBtn = ({ selected = false, handleClick }) => {
 };
 
 const ServiceCard = ({
+  id,
   name,
   duration,
-  initSelect,
+  isSelect,
   handleSelect,
 }) => {
-  const [selected, setSelected] = useState(initSelect);
   const handleClick = () => {
-    setSelected(!selected);
-    handleSelect(name, !selected);
+    handleSelect(id, !isSelect);
   };
 
   return (
-    <div className="service">
-      <p className="name">{name}</p>
-      <div className="interaction">
-        <p className="duration">{duration}</p>
-        <SelectBtn selected={selected} handleClick={handleClick} />
+    <div className="serviceCard">
+      <p className="serviceCard___name">{name}</p>
+      <div className="serviceCard__interaction">
+        <p className="serviceCard__duration">{`${duration} min`}</p>
+        <SelectBtn selected={isSelect} handleClick={handleClick} />
       </div>
     </div>
   );
