@@ -119,7 +119,7 @@ const StepDateTime = ({
             value={selDateTime?.stylistID || ""}
             onChange={handleStylistChange}
           >
-            {stylists !== undefined &&
+            {stylists &&
               stylists.map((stylist) => (
                 <option key={stylist.id} value={stylist.id}>
                   {stylist.firstname} {stylist.lastname}

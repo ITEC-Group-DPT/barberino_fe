@@ -32,7 +32,7 @@ const BookingStep = () => {
 
   const handleNext = () => {
     if (activeStep === 0) {
-      const isValid = validateStepOne(information);
+      const isValid = validateStepOne();
 
       if (isValid === false) {
         alert("Please input all field");
@@ -56,6 +56,7 @@ const BookingStep = () => {
         if (response.status === 200) {
           if (response.data === "success") {
             alert("Booking successfully");
+            window.location.reload();
           } else {
             alert("Conflicted! Please select new datetime");
           }
