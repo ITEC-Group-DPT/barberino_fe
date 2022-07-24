@@ -4,5 +4,31 @@
   background: #f6f2ea;
   height: 100vh;
   display: flex;
+  flex-direction: column;
+  text-align: center;
   justify-content: center;
+}
+
+.heading {
+  font-size: 60px;
+  font-weight: 700;
+  line-height: 1.1;
+  font-family: "Barlow Condensed", sans-serif;
+  text-transform: uppercase;
+  margin: 10px 0;
+}
+
+.subHeading {
+  font-size: 12px;
+  display: block;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  color: #ffc107;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.grayText {
+  color: #808080;
+  margin-bottom: 24px;
 }

@@ -10,6 +10,7 @@ const StepInfo = ({ data, setData }) => {
         <input
           className="info__input"
           type="email"
+          name="email"
           placeholder="Email"
           value={data?.email || ""}
           onChange={(event) => handleChange("email", event)}
@@ -17,6 +18,7 @@ const StepInfo = ({ data, setData }) => {
         <input
           className="info__input"
           type="tel"
+          name="phone"
           placeholder="Phone"
           value={data?.phone || ""}
           onChange={(event) => handleChange("phone", event)}
