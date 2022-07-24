@@ -1,0 +1,33 @@
+@import "../../library";
+
+.header {
+  box-shadow: 0 0 10px 0 rgb(0 0 0 / 10%);
+  padding: 16px 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background: white;
+
+  @include element("content") {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+  }
+
+  @include element("title") {
+    margin: 0 20px;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    letter-spacing: 1px;
+
+    &:hover {
+      color: $orange;
+    }
+    @include modifier("active") {
+      color: $orange;
+    }
+  }
+}

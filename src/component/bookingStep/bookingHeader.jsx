@@ -3,7 +3,6 @@ import React from "react";
 const activeStepStyle = {
   background: "#ffc009",
   color: "white",
-  fontWeight: "bold",
 };
 
 const BookingHeader = ({ data, setActive, active }) => {
