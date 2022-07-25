@@ -8,7 +8,9 @@ const Header = () => {
       <ul className="header__content">
         <li className="header__title header__title--active">Home</li>
         {navTitle.map((item) => (
-          <li className="header__title">{item}</li>
+          <li key={item} className="header__title">
+            {item}
+          </li>
         ))}
       </ul>
     </div>

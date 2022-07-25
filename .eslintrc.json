@@ -43,5 +43,12 @@
     "jsx-a11y/anchor-is-valid": 0,
     "react-hooks/exhaustive-deps": 0,
     "no-alert": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
   }
 }
