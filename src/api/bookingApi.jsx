@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import axios from "axios";
 
-const API_URL = "http://barberinobe.phuhanh.com.vn/api/";
+const API_URL = "https://barberinobe.phuhanh.com.vn/api/";
 
 const getServicesAPI = () => {
   const params = {
