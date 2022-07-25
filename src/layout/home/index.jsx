@@ -1,9 +1,9 @@
 import React from "react";
-import Stepper from "../component/bookingStep";
-import Header from "../component/header";
+import Stepper from "../../component/bookingStep";
+import Header from "../../component/header";
 import "./home.scss";
 
-const App = () => {
+const Home = () => {
   return (
     <>
       <Header />
@@ -21,4 +21,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Home;
