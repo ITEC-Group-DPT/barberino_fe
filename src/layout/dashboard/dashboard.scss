@@ -1,1 +1,52 @@
 @import "../../library";
+
+.main {
+  background: #f7f8fc;
+  height: 100vh;
+}
+
+.dashboard {
+  margin-left: 200px;
+  padding: 0px 5%;
+
+  @include element("header") {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  @include element("statistic") {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 40px;
+  }
+
+  @include element("booking") {
+  }
+}
+
+.control {
+  display: flex;
+
+  @include element("user") {
+    display: flex;
+    margin-left: 70px;
+
+    @include element("name") {
+      align-self: center;
+      font-size: 15px;
+      font-weight: 500;
+      margin-right: 15px;
+    }
+  }
+}
+
+.image {
+  align-self: center;
+  margin: 0;
+}
+
+.title {
+  font-size: 25px;
+  font-weight: 600;
+}

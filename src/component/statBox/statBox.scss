@@ -1,0 +1,41 @@
+@import "../../library";
+
+.statBox {
+    background: white;
+    border-radius: 10px;
+    border: 1px solid;
+    padding: 20px;
+
+    @include element("title") {
+        text-align: center;
+        font-weight: 500;
+        margin: 0 0 15px 0;
+    }
+
+    @include element("value") {
+        text-align: center;
+        font-size: 35px;
+        font-weight: 500;
+        margin: 0
+    }
+}
+
+.Ongoing {
+    border-color: #7A87D7;
+    color: #7A87D7;
+}
+
+.Overdue {
+    border-color: #D0AA48;
+    color: #D0AA48;
+}
+
+.Cancelled {
+    border-color: #D75050;
+    color: #D75050;
+}
+
+.Total {
+    border-color: #252733;
+    color: #252733;
+}
