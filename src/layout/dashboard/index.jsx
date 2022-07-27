@@ -27,26 +27,6 @@ const statistic = [
 
 const bookingList = [
   {
-    id: 92,
-    cusName: "Nam Phu",
-    phoneNum: "0945461850",
-    dateCreated: "2022-07-27 10:49:00",
-    startDate: "2022-08-02 20:45:00",
-    endDate: "2022-08-02 23:20:00",
-    empName: "Dao Sama",
-    status: "ongoing",
-    services: [
-      "Hair Cut",
-      "Hair Styling",
-      "Hair Triming",
-      "Clean Shaving",
-      "Beard Triming",
-      "Smooth Shave",
-      "White Facial",
-      "Face Cleaning",
-    ],
-  },
-  {
     id: "91",
     cusName: "Minh Tri",
     phoneNum: "08224574381",
@@ -67,6 +47,27 @@ const bookingList = [
     empName: "Tri Kun",
     status: "overdue",
     services: ["Hair Cut", "Hair Styling", "Face Cleaning"],
+  },
+  {
+    id: 92,
+    cusName: "Nam Phu",
+    phoneNum: "0945461850",
+    dateCreated: "2022-07-27 10:49:00",
+    startDate: "2022-08-02 20:45:00",
+    endDate: "2022-08-02 23:20:00",
+    empName: "Dao Sama",
+    status: "ongoing",
+    services: [
+      "Hair Cut",
+      "Hair Styling",
+      "Hair Triming",
+      "Clean Shaving",
+      "Beard Triming",
+      "Smooth Shave",
+      "White Facial",
+      "Face Cleaning",
+      "Bright Tuning",
+    ],
   },
   {
     id: "90",
@@ -179,7 +180,9 @@ const Dashboard = () => {
           <div className="list">
             <div className="list__title">
               {titleList.map((title) => (
-                <p key={title} className="list__title__name">{title}</p>
+                <p key={title} className="list__title__name">
+                  {title}
+                </p>
               ))}
             </div>
 
