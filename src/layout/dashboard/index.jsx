@@ -24,13 +24,24 @@ const statistic = [
   },
 ];
 
+const statusList = ["All Booking", "Ongoing", "Overdue", "Cancelled"];
+
 const Dashboard = () => {
   const [stats, setStats] = useState([]);
+  const [selStatus, setSelStatus] = useState(statusList[0]);
 
   useEffect(() => {
     // call api here
+
     setStats(statistic);
   }, []);
+
+  const handleSelStatusChange = (e) => {
+    // call api here
+
+    const val = e.target.value;
+    setSelStatus(val);
+  };
 
   return (
     <div className="main">
@@ -38,14 +49,14 @@ const Dashboard = () => {
 
       <div className="dashboard">
         <div className="dashboard__header">
-          <p className="title">Overview</p>
+          <p className="dashboard__header__title">Overview</p>
 
           <div className="control">
-            <img className="image" src={notiIc} alt="noti" />
+            <img className="img img--16" src={notiIc} alt="noti" />
 
             <div className="control__user">
               <p className="control__user__name">Administrator</p>
-              <img className="image" src={avatarIc} alt="avatar" />
+              <img className="img img--44" src={avatarIc} alt="avatar" />
             </div>
           </div>
         </div>
@@ -58,7 +69,23 @@ const Dashboard = () => {
         </div>
 
         <div className="dashboard__booking">
-          <p>booking</p>
+          <div className="menu">
+            <select
+              name="status"
+              className="menu__status"
+              value={selStatus}
+              onChange={handleSelStatusChange}
+            >
+              {statusList.map((status) => (
+                <option key={status} value={status}>
+                  {status}
+                </option>
+              ))}
+            </select>
+            <div className="menu__filter">
+              <p>hehe</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

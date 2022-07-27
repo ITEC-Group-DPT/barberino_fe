@@ -13,15 +13,23 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+
+    @include element("title") {
+      font-size: 25px;
+      font-weight: 600;
+    }
   }
 
   @include element("statistic") {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     column-gap: 40px;
+    margin-bottom: 60px;
   }
 
   @include element("booking") {
+    background: white;
+    border: 1.5px #dfe0eb solid;
   }
 }
 
@@ -41,12 +49,28 @@
   }
 }
 
-.image {
-  align-self: center;
-  margin: 0;
+.menu {
+  @include element("status") {
+    border-radius: 5px;
+    border: 1.5px #dfe0eb solid;
+    font-size: 15px;
+    font-weight: 500;
+  }
 }
 
-.title {
-  font-size: 25px;
-  font-weight: 600;
+.img {
+  align-self: center;
+  margin: 0;
+
+  @include modifier("16") {
+    width: 16px;
+  }
+
+  @include modifier("24") {
+    width: 24px;
+  }
+
+  @include modifier("44") {
+    width: 44px;
+  }
 }
