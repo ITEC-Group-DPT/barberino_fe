@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./dashboard.scss";
 import LeftNav from "component/leftNav/leftNav";
 import StatBox from "component/statBox/statBox";
-import { notiIc, avatarIc } from "constants/icon";
+import BookingItem from "component/bookingItem/bookingItem";
+import { notiIc, avatarIc, sortIc, filterIc } from "constants/icon";
 
 const statistic = [
   {
@@ -24,14 +25,77 @@ const statistic = [
   },
 ];
 
+const bookingList = [
+  {
+    id: 92,
+    cusName: "Nam Phu",
+    phoneNum: "0945461850",
+    dateCreated: "2022-07-27 10:49:00",
+    startDate: "2022-08-02 20:45:00",
+    endDate: "2022-08-02 23:20:00",
+    empName: "Dao Sama",
+    status: "ongoing",
+    services: [
+      "Hair Cut",
+      "Hair Styling",
+      "Hair Triming",
+      "Clean Shaving",
+      "Beard Triming",
+      "Smooth Shave",
+      "White Facial",
+      "Face Cleaning",
+    ],
+  },
+  {
+    id: "91",
+    cusName: "Minh Tri",
+    phoneNum: "08224574381",
+    dateCreated: "2022-07-26 22:58:00",
+    startDate: "2022-07-29 09:30:00",
+    endDate: "2022-07-29 09:55:00",
+    empName: "Tri Kun",
+    status: "ongoing",
+    services: ["Hair Styling", "Hair Triming"],
+  },
+  {
+    id: "85",
+    cusName: "Minh Dao",
+    phoneNum: "01284374939",
+    dateCreated: "2022-07-24 12:59:00",
+    startDate: "2022-07-27 09:30:00",
+    endDate: "2022-07-27 10:25:00",
+    empName: "Tri Kun",
+    status: "overdue",
+    services: ["Hair Cut", "Hair Styling", "Face Cleaning"],
+  },
+  {
+    id: "90",
+    cusName: "Anh Hao",
+    phoneNum: "091813738492",
+    dateCreated: "2022-07-25 14:34:00",
+    startDate: "2022-07-25 15:00:00",
+    endDate: "2022-07-25 15:55:00",
+    empName: "Tri Kun",
+    status: "cancelled",
+    services: ["Hair Cut", "Hair Styling", "Clean Shaving"],
+  },
+];
+
 const statusList = ["All Booking", "Ongoing", "Overdue", "Cancelled"];
+const titleList = [
+  "Booking details",
+  "Customer name",
+  "Date created",
+  "Stylist name",
+];
 
 const Dashboard = () => {
   const [stats, setStats] = useState([]);
   const [selStatus, setSelStatus] = useState(statusList[0]);
+  const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
-    // call api here
+    // call init api here
 
     setStats(statistic);
   }, []);
@@ -56,7 +120,11 @@ const Dashboard = () => {
 
             <div className="control__user">
               <p className="control__user__name">Administrator</p>
-              <img className="img img--44" src={avatarIc} alt="avatar" />
+              <img
+                className="img img--44"
+                src={avatarIc}
+                alt="avatar"
+              />
             </div>
           </div>
         </div>
@@ -64,7 +132,11 @@ const Dashboard = () => {
         <div className="dashboard__statistic">
           {stats &&
             stats.map((stat) => (
-              <StatBox title={stat.title} value={stat.value} />
+              <StatBox
+                key={stat.title}
+                title={stat.title}
+                value={stat.value}
+              />
             ))}
         </div>
 
@@ -82,8 +154,56 @@ const Dashboard = () => {
                 </option>
               ))}
             </select>
+
             <div className="menu__filter">
-              <p>hehe</p>
+              <div className="menu__filter__btn">
+                <img
+                  className="img img--16"
+                  src={sortIc}
+                  alt="noti"
+                />
+                <p className="menu__filter__btn__name">Sort</p>
+              </div>
+
+              <div className="menu__filter__btn">
+                <img
+                  className="img img--16"
+                  src={filterIc}
+                  alt="noti"
+                />
+                <p className="menu__filter__btn__name">Filter</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="list">
+            <div className="list__title">
+              {titleList.map((title) => (
+                <p key={title} className="list__title__name">{title}</p>
+              ))}
+            </div>
+
+            <hr className="line" />
+
+            <div className="list__content">
+              {bookingList.map((booking) => (
+                <>
+                  <BookingItem
+                    key={booking.id}
+                    id={booking.id}
+                    services={booking.services}
+                    startDate={booking.startDate}
+                    endDate={booking.endDate}
+                    cusName={booking.cusName}
+                    phoneNum={booking.phoneNum}
+                    dateCreated={booking.dateCreated}
+                    stylist={booking.empName}
+                    status={booking.status}
+                  />
+
+                  <hr className="line line--thin" />
+                </>
+              ))}
             </div>
           </div>
         </div>
