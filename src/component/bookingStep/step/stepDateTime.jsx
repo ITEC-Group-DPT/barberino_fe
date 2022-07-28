@@ -58,8 +58,13 @@ const StepDateTime = ({
 
   const handleTimeChange = (e) => {
     const val = e.target.value;
+    const newStylistID = timeSlot[e.target.value][0].id;
 
-    setSelDateTime({ ...selDateTime, time: val });
+    setSelDateTime({
+      ...selDateTime,
+      time: val,
+      stylistID: newStylistID,
+    });
   };
 
   const handleStylistChange = (e) => {
