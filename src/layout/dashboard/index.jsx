@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./dashboard.scss";
-import LeftNav from "component/leftNav/leftNav";
 import StatBox from "component/statBox/statBox";
 import BookingItem from "component/bookingItem/bookingItem";
 import { notiIc, avatarIc, sortIc, filterIc } from "constants/icon";
@@ -109,105 +108,93 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="main">
-      <LeftNav />
+    <div className="dashboard">
+      <div className="dashboard__header">
+        <p className="dashboard__header__title">Overview</p>
 
-      <div className="dashboard">
-        <div className="dashboard__header">
-          <p className="dashboard__header__title">Overview</p>
+        <div className="control">
+          <img className="img img--16" src={notiIc} alt="noti" />
 
-          <div className="control">
-            <img className="img img--16" src={notiIc} alt="noti" />
+          <div className="control__user">
+            <p className="control__user__name">Administrator</p>
+            <img
+              className="img img--44"
+              src={avatarIc}
+              alt="avatar"
+            />
+          </div>
+        </div>
+      </div>
 
-            <div className="control__user">
-              <p className="control__user__name">Administrator</p>
+      <div className="dashboard__statistic">
+        {stats &&
+          stats.map((stat) => (
+            <StatBox
+              key={stat.title}
+              title={stat.title}
+              value={stat.value}
+            />
+          ))}
+      </div>
+
+      <div className="dashboard__booking">
+        <div className="menu">
+          <select
+            name="status"
+            className="menu__status"
+            value={selStatus}
+            onChange={handleSelStatusChange}
+          >
+            {statusList.map((status) => (
+              <option key={status} value={status}>
+                {status}
+              </option>
+            ))}
+          </select>
+
+          <div className="menu__filter">
+            <div className="menu__filter__btn">
+              <img className="img img--16" src={sortIc} alt="noti" />
+              <p className="menu__filter__btn__name">Sort</p>
+            </div>
+
+            <div className="menu__filter__btn">
               <img
-                className="img img--44"
-                src={avatarIc}
-                alt="avatar"
+                className="img img--16"
+                src={filterIc}
+                alt="noti"
               />
+              <p className="menu__filter__btn__name">Filter</p>
             </div>
           </div>
         </div>
 
-        <div className="dashboard__statistic">
-          {stats &&
-            stats.map((stat) => (
-              <StatBox
-                key={stat.title}
-                title={stat.title}
-                value={stat.value}
+        <div className="list">
+          <div className="list__title">
+            {titleList.map((title) => (
+              <p key={title} className="list__title__name">
+                {title}
+              </p>
+            ))}
+          </div>
+
+          <hr className="line" />
+
+          <div className="list__content">
+            {bookingList.map((booking) => (
+              <BookingItem
+                key={booking.id}
+                id={booking.id}
+                services={booking.services}
+                startDate={booking.startDate}
+                endDate={booking.endDate}
+                cusName={booking.cusName}
+                phoneNum={booking.phoneNum}
+                dateCreated={booking.dateCreated}
+                stylist={booking.empName}
+                status={booking.status}
               />
             ))}
-        </div>
-
-        <div className="dashboard__booking">
-          <div className="menu">
-            <select
-              name="status"
-              className="menu__status"
-              value={selStatus}
-              onChange={handleSelStatusChange}
-            >
-              {statusList.map((status) => (
-                <option key={status} value={status}>
-                  {status}
-                </option>
-              ))}
-            </select>
-
-            <div className="menu__filter">
-              <div className="menu__filter__btn">
-                <img
-                  className="img img--16"
-                  src={sortIc}
-                  alt="noti"
-                />
-                <p className="menu__filter__btn__name">Sort</p>
-              </div>
-
-              <div className="menu__filter__btn">
-                <img
-                  className="img img--16"
-                  src={filterIc}
-                  alt="noti"
-                />
-                <p className="menu__filter__btn__name">Filter</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="list">
-            <div className="list__title">
-              {titleList.map((title) => (
-                <p key={title} className="list__title__name">
-                  {title}
-                </p>
-              ))}
-            </div>
-
-            <hr className="line" />
-
-            <div className="list__content">
-              {bookingList.map((booking) => (
-                <>
-                  <BookingItem
-                    key={booking.id}
-                    id={booking.id}
-                    services={booking.services}
-                    startDate={booking.startDate}
-                    endDate={booking.endDate}
-                    cusName={booking.cusName}
-                    phoneNum={booking.phoneNum}
-                    dateCreated={booking.dateCreated}
-                    stylist={booking.empName}
-                    status={booking.status}
-                  />
-
-                  <hr className="line line--thin" />
-                </>
-              ))}
-            </div>
           </div>
         </div>
       </div>

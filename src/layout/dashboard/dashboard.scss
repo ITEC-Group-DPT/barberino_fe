@@ -1,13 +1,10 @@
 @import "../../library";
 
-.main {
-  background: #f7f8fc;
-  min-height: 100vh;
-}
-
 .dashboard {
   margin-left: 200px;
   padding: 5px 2% 50px 2%;
+  background: #f7f8fc;
+  min-height: 100vh;
 
   @include element("header") {
     display: flex;
