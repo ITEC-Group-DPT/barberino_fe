@@ -13,7 +13,7 @@ const StatBox = ({ title, value }) => {
     case "Cancelled":
       style = "#D75050";
       break;
-    case "Complete":
+    case "Completed":
       style = "#63B566";
       break;
     case "Total":

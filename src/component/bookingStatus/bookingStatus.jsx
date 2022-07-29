@@ -3,7 +3,7 @@ import "./bookingStatus.scss";
 
 const BookingStatus = ({ status, sttList, handleStatusChange }) => {
   const statusList = sttList.slice(1)
-  
+
   let cl = "";
   switch (status) {
     case "Ongoing":
@@ -15,7 +15,7 @@ const BookingStatus = ({ status, sttList, handleStatusChange }) => {
     case "Cancelled":
       cl = "#D75050";
       break;
-    case "Complete":
+    case "Completed":
       cl = "#51BE55";
       break;
 

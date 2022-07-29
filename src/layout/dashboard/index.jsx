@@ -13,7 +13,7 @@ import { notiIc, avatarIc, sortIc, filterIc } from "constants/icon";
 const titleList = [
   "Booking details",
   "Customer name",
-  "Date created",
+  "Service time",
   "Stylist name",
   "Booking status",
 ];
@@ -21,7 +21,7 @@ const titleList = [
 const Dashboard = () => {
   const [statistic, setStatistic] = useState([]);
   const [statusList, setStatusList] = useState([]);
-  const [selStatus, setSelStatus] = useState("All Booking");
+  const [selStatus, setSelStatus] = useState("Ongoing");
   const [bookings, setBookings] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
@@ -49,6 +49,7 @@ const Dashboard = () => {
 
     setSelStatus(newStatus);
     setPage(1);
+
     getBookingList(1, newStatus);
     getTotalPage(newStatus);
   };
@@ -162,7 +163,6 @@ const Dashboard = () => {
                 endDate={booking.endDate}
                 cusName={booking.cusName}
                 phoneNum={booking.phoneNum}
-                dateCreated={booking.dateCreated}
                 stylist={booking.empName}
                 status={booking.status}
                 sttList={statusList}

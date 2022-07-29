@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./bookingItem.scss";
 import BookingStatus from "component/bookingStatus/bookingStatus";
+import { updateBookingStatus } from "api/adminApi";
 
 const BookingItem = ({
   id,
@@ -9,23 +10,24 @@ const BookingItem = ({
   endDate,
   cusName,
   phoneNum,
-  dateCreated,
   stylist,
   status,
   sttList,
 }) => {
   const [statusName, setStatusName] = useState(status);
 
-  const duration = `${startDate.slice(0, 10)} from ${startDate.slice(
+  const serviceDate = startDate.slice(0, 10);
+  const duration = `from ${startDate.slice(
     10,
     -3
   )} to ${endDate.slice(10, -3)}`;
 
-  const date = dateCreated.split(" ");
-
   const handleStatusChange = (stt) => {
-    setStatusName(stt);
-    console.log(id, stt);
+    updateBookingStatus(id, stt).then((response) => {
+      if (response.status === 200) {
+        setStatusName(stt);
+      }
+    });
   };
 
   return (
@@ -34,7 +36,6 @@ const BookingItem = ({
         <div className="bookIt__col">
           <div>
             <p className="boldText">{services.join(", ")}</p>
-            <p className="blurText">{duration}</p>
           </div>
         </div>
 
@@ -47,8 +48,8 @@ const BookingItem = ({
 
         <div className="bookIt__col">
           <div>
-            <p className="boldText">{date[0]}</p>
-            <p className="blurText">{`at: ${date[1]}`}</p>
+            <p className="boldText">{serviceDate}</p>
+            <p className="blurText">{duration}</p>
           </div>
         </div>
 
