@@ -10,6 +10,7 @@ import {
 } from "api/adminApi";
 import { notiIc, avatarIc, sortIc, filterIc } from "constants/icon";
 
+const statusList = ["All Booking", "Ongoing", "Overdue", "Completed", "Cancelled"];
 const titleList = [
   "Booking details",
   "Customer name",
@@ -20,7 +21,6 @@ const titleList = [
 
 const Dashboard = () => {
   const [statistic, setStatistic] = useState([]);
-  const [statusList, setStatusList] = useState([]);
   const [selStatus, setSelStatus] = useState("Ongoing");
   const [bookings, setBookings] = useState([]);
   const [page, setPage] = useState(1);
@@ -29,8 +29,7 @@ const Dashboard = () => {
   const getBookingList = (curPage, curStatus) => {
     getBookingListAPI(curPage, curStatus).then((response) => {
       if (response.status === 200) {
-        const res = response.data;
-        setBookings(res);
+        setBookings(response.data);
       }
     });
   };
@@ -65,14 +64,7 @@ const Dashboard = () => {
         const res = response.data;
 
         const orderedList = [res[1], res[2], res[3], res[0], res[4]];
-        const list = ["All Booking"];
-
-        for (let i = 0; i < orderedList.length - 1; i += 1) {
-          list.push(orderedList[i].title);
-        }
-
         setStatistic(orderedList);
-        setStatusList(list);
       }
     });
 

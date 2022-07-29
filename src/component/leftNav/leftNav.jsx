@@ -32,7 +32,7 @@ const LeftNav = () => {
   return (
     <div className="nav">
       <div className="nav__title">
-        <img className="icon icon--title" alt="icon" src={logoIc} />
+        <img className="icon icon__title" alt="icon" src={logoIc} />
         <p className="nav__title__name">Barberino</p>
       </div>
 

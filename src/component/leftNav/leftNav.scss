@@ -54,7 +54,7 @@
   margin-left: 25px;
   width: 16px;
 
-  @include modifier("title") {
+  @include element("title") {
     margin-left: 17px;
     margin-right: 12px;
     width: 32px;

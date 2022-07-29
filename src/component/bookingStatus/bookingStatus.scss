@@ -7,9 +7,16 @@
   font-weight: 500;
   padding: 2px 2px;
   cursor: pointer;
+  width: 100%;
   text-align: center;
 
   &:focus-visible {
     outline: 0;
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 1;
+    appearance: none;
   }
 }

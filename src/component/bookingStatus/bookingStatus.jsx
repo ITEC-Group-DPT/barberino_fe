@@ -1,9 +1,8 @@
 import React from "react";
 import "./bookingStatus.scss";
 
-const BookingStatus = ({ status, sttList, handleStatusChange }) => {
-  const statusList = sttList.slice(1)
-
+const BookingStatus = ({ status, handleStatusChange }) => {
+  const statusList = [status, "Completed", "Cancelled"];
   let cl = "";
   switch (status) {
     case "Ongoing":
@@ -26,6 +25,7 @@ const BookingStatus = ({ status, sttList, handleStatusChange }) => {
     <select
       name="status"
       className="bookingStatus"
+      disabled={status !== "Ongoing"}
       style={{ borderColor: cl, color: cl }}
       value={status}
       onChange={(e) => handleStatusChange(e.target.value)}

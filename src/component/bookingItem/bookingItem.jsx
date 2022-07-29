@@ -12,7 +12,6 @@ const BookingItem = ({
   phoneNum,
   stylist,
   status,
-  sttList,
 }) => {
   const [statusName, setStatusName] = useState(status);
 
@@ -32,35 +31,34 @@ const BookingItem = ({
 
   return (
     <>
-      <div className="bookIt">
-        <div className="bookIt__col">
+      <div className="bookingCard">
+        <div className="bookingCard__col">
           <div>
             <p className="boldText">{services.join(", ")}</p>
           </div>
         </div>
 
-        <div className="bookIt__col">
+        <div className="bookingCard__col">
           <div>
             <p className="boldText">{cusName}</p>
             <p className="blurText">{`Tel: ${phoneNum}`}</p>
           </div>
         </div>
 
-        <div className="bookIt__col">
+        <div className="bookingCard__col">
           <div>
             <p className="boldText">{serviceDate}</p>
             <p className="blurText">{duration}</p>
           </div>
         </div>
 
-        <div className="bookIt__col">
+        <div className="bookingCard__col">
           <p className="boldText">{stylist}</p>
         </div>
 
-        <div className="bookIt__col">
+        <div className="bookingCard__col">
           <BookingStatus
             status={statusName}
-            sttList={sttList}
             handleStatusChange={handleStatusChange}
           />
         </div>
