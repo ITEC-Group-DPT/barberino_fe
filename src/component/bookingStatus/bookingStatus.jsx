@@ -1,9 +1,9 @@
 import React from "react";
 import "./bookingStatus.scss";
 
-const statusList = ["Ongoing", "Overdue", "Cancelled", "Completed"];
-
-const BookingStatus = ({ status, handleStatusChange }) => {
+const BookingStatus = ({ status, sttList, handleStatusChange }) => {
+  const statusList = sttList.slice(1)
+  
   let cl = "";
   switch (status) {
     case "Ongoing":
@@ -15,7 +15,7 @@ const BookingStatus = ({ status, handleStatusChange }) => {
     case "Cancelled":
       cl = "#D75050";
       break;
-    case "Completed":
+    case "Complete":
       cl = "#51BE55";
       break;
 

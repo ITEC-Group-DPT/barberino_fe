@@ -12,6 +12,7 @@ const BookingItem = ({
   dateCreated,
   stylist,
   status,
+  sttList,
 }) => {
   const [statusName, setStatusName] = useState(status);
 
@@ -58,6 +59,7 @@ const BookingItem = ({
         <div className="bookIt__col">
           <BookingStatus
             status={statusName}
+            sttList={sttList}
             handleStatusChange={handleStatusChange}
           />
         </div>

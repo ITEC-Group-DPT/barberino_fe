@@ -2,7 +2,15 @@ import React from "react";
 import "./pagination.scss";
 import { arrowLeftIc, arrowRightIc } from "constants/icon";
 
-const Pagination = ({ currPage, totalPage, onNext, onPrev }) => {
+const Pagination = ({ currPage, totalPage, onPageChange }) => {
+  const onNext = () => {
+    if (currPage < totalPage) onPageChange(currPage + 1);
+  };
+
+  const onPrev = () => {
+    if (currPage > 1) onPageChange(currPage - 1);
+  };
+
   return (
     <div className="page">
       <p className="page__title">{`Page ${currPage} of ${totalPage}`}</p>

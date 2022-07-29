@@ -3,86 +3,13 @@ import "./dashboard.scss";
 import StatBox from "component/statBox/statBox";
 import BookingItem from "component/bookingItem/bookingItem";
 import Pagination from "component/pagination/pagination";
+import {
+  getStatisticAPI,
+  getBookingListAPI,
+  getTotalPageAPI,
+} from "api/adminApi";
 import { notiIc, avatarIc, sortIc, filterIc } from "constants/icon";
 
-const statistic = [
-  {
-    title: "Ongoing",
-    value: 60,
-  },
-
-  {
-    title: "Overdue",
-    value: 16,
-  },
-  {
-    title: "Cancelled",
-    value: 43,
-  },
-  {
-    title: "Total",
-    value: 119,
-  },
-];
-
-const bookingList = [
-  {
-    id: "91",
-    cusName: "Minh Tri",
-    phoneNum: "08224574381",
-    dateCreated: "2022-07-26 22:58:00",
-    startDate: "2022-07-29 09:30:00",
-    endDate: "2022-07-29 09:55:00",
-    empName: "Tri Kun",
-    status: "Ongoing",
-    services: ["Hair Styling", "Hair Triming"],
-  },
-  {
-    id: "85",
-    cusName: "Minh Dao",
-    phoneNum: "01284374939",
-    dateCreated: "2022-07-24 12:59:00",
-    startDate: "2022-07-27 09:30:00",
-    endDate: "2022-07-27 10:25:00",
-    empName: "Tri Kun",
-    status: "Overdue",
-    services: ["Hair Cut", "Hair Styling", "Face Cleaning"],
-  },
-  {
-    id: "92",
-    cusName: "Nam Phu",
-    phoneNum: "0945461850",
-    dateCreated: "2022-07-27 10:49:00",
-    startDate: "2022-08-02 20:45:00",
-    endDate: "2022-08-02 23:20:00",
-    empName: "Dao Sama",
-    status: "Ongoing",
-    services: [
-      "Hair Cut",
-      "Hair Styling",
-      "Hair Triming",
-      "Clean Shaving",
-      "Beard Triming",
-      "Smooth Shave",
-      "White Facial",
-      "Face Cleaning",
-      "Bright Tuning",
-    ],
-  },
-  {
-    id: "90",
-    cusName: "Anh Hao",
-    phoneNum: "091813738492",
-    dateCreated: "2022-07-25 14:34:00",
-    startDate: "2022-07-25 15:00:00",
-    endDate: "2022-07-25 15:55:00",
-    empName: "Tri Kun",
-    status: "Cancelled",
-    services: ["Hair Cut", "Hair Styling", "Clean Shaving"],
-  },
-];
-
-const statusList = ["All Booking", "Ongoing", "Overdue", "Cancelled"];
 const titleList = [
   "Booking details",
   "Customer name",
@@ -92,40 +19,65 @@ const titleList = [
 ];
 
 const Dashboard = () => {
-  const [stats, setStats] = useState([]);
-  const [selStatus, setSelStatus] = useState(statusList[0]);
+  const [statistic, setStatistic] = useState([]);
+  const [statusList, setStatusList] = useState([]);
+  const [selStatus, setSelStatus] = useState("All Booking");
   const [bookings, setBookings] = useState([]);
-  const [page, setPage] = useState({
-    currPage: 1,
-    totalPage: 1,
-  });
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
 
-  useEffect(() => {
-    // call init api here
+  const getBookingList = (curPage, curStatus) => {
+    getBookingListAPI(curPage, curStatus).then((response) => {
+      if (response.status === 200) {
+        const res = response.data;
+        setBookings(res);
+      }
+    });
+  };
 
-    setStats(statistic);
-    setPage({ ...page, totalPage: 8 });
-  }, []);
-
-  useEffect(() => {
-    // call page and status change api here
-
-  }, [page, selStatus]);
+  const getTotalPage = (curStatus) => {
+    getTotalPageAPI(curStatus).then((response) => {
+      if (response.status === 200) {
+        const res = response.data.totalPages;
+        setTotalPage(parseInt(res, 10));
+      }
+    });
+  };
 
   const handleSelStatusChange = (e) => {
-    const val = e.target.value;
-    setSelStatus(val);
+    const newStatus = e.target.value;
+
+    setSelStatus(newStatus);
+    setPage(1);
+    getBookingList(1, newStatus);
+    getTotalPage(newStatus);
   };
 
-  const handleNextPage = () => {
-    if (page.currPage < page.totalPage)
-      setPage({ ...page, currPage: page.currPage + 1 });
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+    getBookingList(newPage, selStatus);
   };
 
-  const handlePrevPage = () => {
-    if (page.currPage > 1)
-      setPage({ ...page, currPage: page.currPage - 1 });
-  };
+  useEffect(() => {
+    getStatisticAPI().then((response) => {
+      if (response.status === 200) {
+        const res = response.data;
+
+        const orderedList = [res[1], res[2], res[3], res[0], res[4]];
+        const list = ["All Booking"];
+
+        for (let i = 0; i < orderedList.length - 1; i += 1) {
+          list.push(orderedList[i].title);
+        }
+
+        setStatistic(orderedList);
+        setStatusList(list);
+      }
+    });
+
+    getBookingList(page, selStatus);
+    getTotalPage(selStatus);
+  }, []);
 
   return (
     <div className="dashboard">
@@ -147,8 +99,8 @@ const Dashboard = () => {
       </div>
 
       <div className="dashboard__statistic">
-        {stats &&
-          stats.map((stat) => (
+        {statistic &&
+          statistic.map((stat) => (
             <StatBox
               key={stat.title}
               title={stat.title}
@@ -201,7 +153,7 @@ const Dashboard = () => {
           <hr className="line" />
 
           <div className="list__content">
-            {bookingList.map((booking) => (
+            {bookings.map((booking) => (
               <BookingItem
                 key={booking.id}
                 id={booking.id}
@@ -213,6 +165,7 @@ const Dashboard = () => {
                 dateCreated={booking.dateCreated}
                 stylist={booking.empName}
                 status={booking.status}
+                sttList={statusList}
               />
             ))}
           </div>
@@ -220,10 +173,9 @@ const Dashboard = () => {
 
         <div className="pagination">
           <Pagination
-            currPage={page.currPage}
-            totalPage={page.totalPage}
-            onNext={handleNextPage}
-            onPrev={handlePrevPage}
+            currPage={page}
+            totalPage={totalPage}
+            onPageChange={handlePageChange}
           />
         </div>
       </div>
