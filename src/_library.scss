@@ -1,4 +1,5 @@
 $orange: #ffc009 !default;
+$black: #252733 !default;
 
 /// Block Element
 @mixin element($element) {
@@ -6,9 +7,10 @@ $orange: #ffc009 !default;
     @content;
   }
 }
+
 /// Block Modifier
 @mixin modifier($modifier) {
   &--#{$modifier} {
     @content;
   }
-} ;
+}

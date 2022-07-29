@@ -1,0 +1,45 @@
+@import "../../library";
+
+.bookingCard {
+  display: grid;
+  grid-template-columns: 2.5fr .9fr .7fr .6fr .6fr;
+  column-gap: 30px;
+  padding: 0 25px;
+  height: 110px;
+
+  @include element("col") {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.lineBreak {
+  border: none;
+  height: 1px;
+  background: #dfe0eb;
+  margin: 0;
+}
+
+.boldText {
+  font-size: 13px;
+  font-weight: 500;
+  color: $black;
+  margin: 0;
+}
+
+.blurText {
+  font-size: 11px;
+  color: #c5c7cd;
+  margin: 5px 0 0 0;
+}
+
+.moreBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  height: fit-content;
+  align-self: center;
+  padding: 0;
+  display: flex;
+  column-gap: 10px;
+}

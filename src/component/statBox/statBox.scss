@@ -1,0 +1,21 @@
+@import "../../library";
+
+.statBox {
+    background: white;
+    border-radius: 10px;
+    border: 1.5px solid;
+    padding: 20px;
+
+    @include element("title") {
+        text-align: center;
+        font-weight: 500;
+        margin: 0 0 15px 0;
+    }
+
+    @include element("value") {
+        text-align: center;
+        font-size: 32px;
+        font-weight: 500;
+        margin: 0
+    }
+}

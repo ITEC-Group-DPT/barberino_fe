@@ -1,0 +1,62 @@
+@import "../../library";
+
+.nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: #363740;
+  height: 100vh;
+
+  @include element("title") {
+    display: flex;
+    margin: 20px 0px 40px 0px;
+
+    @include element("name") {
+      color: white;
+      font-weight: 500;
+      margin-right: 60px;
+    }
+  }
+
+  @include element("list") {
+    list-style-type: none;
+    color: white;
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.item {
+  display: flex;
+  font-size: 14px;
+  padding-bottom: 5px;
+  cursor: pointer;
+  transition: 0.3s background;
+
+  &:hover {
+    background: #3e3f4a;
+  }
+
+  @include element("title") {
+    color: #a4a6b3;
+  }
+
+  @include modifier("active") {
+    color: white;
+    background: #3e3f4a;
+  }
+}
+
+.icon {
+  align-self: center;
+  margin-right: 20px;
+  margin-left: 25px;
+  width: 16px;
+
+  @include element("title") {
+    margin-left: 17px;
+    margin-right: 12px;
+    width: 32px;
+  }
+}

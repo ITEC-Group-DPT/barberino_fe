@@ -1,0 +1,29 @@
+@import "../../library";
+
+.page {
+  display: flex;
+  @include element("title") {
+    color: #9fa2b4;
+    font-size: 13px;
+    margin-right: 30px;
+  }
+
+  @include element("control") {
+    display: flex;
+    column-gap: 10px;
+  }
+}
+
+.pageBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  align-self: center;
+  padding: 0;
+  height: 100%;
+
+  @include modifier("disabled") {
+    opacity: 0.4;
+    cursor: default;
+  }
+}
