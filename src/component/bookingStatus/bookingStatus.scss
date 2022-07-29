@@ -1,0 +1,15 @@
+@import "../../library";
+
+.bookingStatus {
+  border-radius: 5px;
+  border: 1.5px solid;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 2px 2px;
+  cursor: pointer;
+  text-align: center;
+
+  &:focus-visible {
+    outline: 0;
+  }
+}

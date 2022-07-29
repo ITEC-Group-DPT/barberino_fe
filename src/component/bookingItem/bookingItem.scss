@@ -2,7 +2,7 @@
 
 .bookIt {
   display: grid;
-  grid-template-columns: 2.5fr 1fr 1fr 1fr;
+  grid-template-columns: 2.5fr .9fr .7fr .6fr .6fr;
   column-gap: 30px;
   padding: 0 25px;
   height: 110px;
@@ -10,10 +10,6 @@
   @include element("col") {
     display: flex;
     align-items: center;
-
-    @include modifier("last") {
-        justify-content: space-between;
-    }
   }
 }
 
@@ -29,10 +25,6 @@
   font-weight: 500;
   color: $black;
   margin: 0;
-
-  @include modifier("last") {
-    align-self: center;
-  }
 }
 
 .blurText {
@@ -48,4 +40,6 @@
   height: fit-content;
   align-self: center;
   padding: 0;
+  display: flex;
+  column-gap: 10px;
 }

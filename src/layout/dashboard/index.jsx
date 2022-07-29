@@ -34,7 +34,7 @@ const bookingList = [
     startDate: "2022-07-29 09:30:00",
     endDate: "2022-07-29 09:55:00",
     empName: "Tri Kun",
-    status: "ongoing",
+    status: "Ongoing",
     services: ["Hair Styling", "Hair Triming"],
   },
   {
@@ -45,18 +45,18 @@ const bookingList = [
     startDate: "2022-07-27 09:30:00",
     endDate: "2022-07-27 10:25:00",
     empName: "Tri Kun",
-    status: "overdue",
+    status: "Overdue",
     services: ["Hair Cut", "Hair Styling", "Face Cleaning"],
   },
   {
-    id: 92,
+    id: "92",
     cusName: "Nam Phu",
     phoneNum: "0945461850",
     dateCreated: "2022-07-27 10:49:00",
     startDate: "2022-08-02 20:45:00",
     endDate: "2022-08-02 23:20:00",
     empName: "Dao Sama",
-    status: "ongoing",
+    status: "Ongoing",
     services: [
       "Hair Cut",
       "Hair Styling",
@@ -77,7 +77,7 @@ const bookingList = [
     startDate: "2022-07-25 15:00:00",
     endDate: "2022-07-25 15:55:00",
     empName: "Tri Kun",
-    status: "cancelled",
+    status: "Cancelled",
     services: ["Hair Cut", "Hair Styling", "Clean Shaving"],
   },
 ];
@@ -88,6 +88,7 @@ const titleList = [
   "Customer name",
   "Date created",
   "Stylist name",
+  "Booking status",
 ];
 
 const Dashboard = () => {

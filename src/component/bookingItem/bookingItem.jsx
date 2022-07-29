@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import "./bookingItem.scss";
-import { moreIc } from "constants/icon";
+import BookingStatus from "component/bookingStatus/bookingStatus";
 
 const BookingItem = ({
   id,
@@ -13,12 +13,19 @@ const BookingItem = ({
   stylist,
   status,
 }) => {
+  const [statusName, setStatusName] = useState(status);
+
   const duration = `${startDate.slice(0, 10)} from ${startDate.slice(
     10,
     -3
   )} to ${endDate.slice(10, -3)}`;
 
   const date = dateCreated.split(" ");
+
+  const handleStatusChange = (stt) => {
+    setStatusName(stt);
+    console.log(id, stt);
+  };
 
   return (
     <>
@@ -44,13 +51,18 @@ const BookingItem = ({
           </div>
         </div>
 
-        <div className="bookIt__col bookIt__col--last">
-          <p className="boldText boldText--last">{stylist}</p>
-          <button className="moreBtn" type="button">
-            <img className="img img--24" src={moreIc} alt="moreBth" />
-          </button>
+        <div className="bookIt__col">
+          <p className="boldText">{stylist}</p>
+        </div>
+
+        <div className="bookIt__col">
+          <BookingStatus
+            status={statusName}
+            handleStatusChange={handleStatusChange}
+          />
         </div>
       </div>
+
       <hr className="line line--thin" />
     </>
   );
