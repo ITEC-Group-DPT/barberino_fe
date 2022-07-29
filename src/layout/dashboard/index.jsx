@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./dashboard.scss";
 import StatBox from "component/statBox/statBox";
 import BookingItem from "component/bookingItem/bookingItem";
+import Pagination from "component/pagination/pagination";
 import { notiIc, avatarIc, sortIc, filterIc } from "constants/icon";
 
 const statistic = [
@@ -93,18 +94,36 @@ const Dashboard = () => {
   const [stats, setStats] = useState([]);
   const [selStatus, setSelStatus] = useState(statusList[0]);
   const [bookings, setBookings] = useState([]);
+  const [page, setPage] = useState({
+    currPage: 1,
+    totalPage: 1,
+  });
 
   useEffect(() => {
     // call init api here
 
     setStats(statistic);
+    setPage({ ...page, totalPage: 8 });
   }, []);
 
-  const handleSelStatusChange = (e) => {
-    // call api here
+  useEffect(() => {
+    // call page and status change api here
 
+  }, [page, selStatus]);
+
+  const handleSelStatusChange = (e) => {
     const val = e.target.value;
     setSelStatus(val);
+  };
+
+  const handleNextPage = () => {
+    if (page.currPage < page.totalPage)
+      setPage({ ...page, currPage: page.currPage + 1 });
+  };
+
+  const handlePrevPage = () => {
+    if (page.currPage > 1)
+      setPage({ ...page, currPage: page.currPage - 1 });
   };
 
   return (
@@ -196,6 +215,15 @@ const Dashboard = () => {
               />
             ))}
           </div>
+        </div>
+
+        <div className="pagination">
+          <Pagination
+            currPage={page.currPage}
+            totalPage={page.totalPage}
+            onNext={handleNextPage}
+            onPrev={handlePrevPage}
+          />
         </div>
       </div>
     </div>
