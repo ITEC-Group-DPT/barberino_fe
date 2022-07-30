@@ -24,6 +24,7 @@ const allDocuments = [
 const DocumentList = () => {
   return (
     <div className="document">
+      <h2 className="document__title">Document List</h2>
       {allDocuments.map((doc, index) => (
         <a
           key={doc.label}

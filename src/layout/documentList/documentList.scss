@@ -6,6 +6,11 @@
   background: #f7f8fc;
   min-height: 100vh;
 
+  @include element("title") {
+    color: #3850ff;
+    margin-top: 0;
+    margin-bottom: 26px;
+  }
   @include element("item") {
     display: block;
     margin-bottom: 25px;
