@@ -15,7 +15,6 @@ const BookingStep = () => {
   const [information, setInformation] = useState();
   const [selServices, setSelServices] = useState([]);
   const [selDateTime, setSelDateTime] = useState({});
-  const [booking, setBooking] = useState({});
   const [showModal, setShowModal] = useState(false);
 
   const validateStepOne = () => {
@@ -45,15 +44,6 @@ const BookingStep = () => {
         return;
       }
     } else if (activeStep === 2) {
-      const modalData = {
-        ...information,
-        selected_services: selServices,
-        selected_date: selDateTime.date,
-        selected_time: selDateTime.time,
-        selected_employee: selDateTime.stylistName,
-      };
-
-      setBooking(modalData);
       setShowModal(true);
     }
 
@@ -131,7 +121,7 @@ const BookingStep = () => {
         show={showModal}
         onClose={() => setShowModal(false)}
         onConfirm={handleConfirm}
-        content={booking}
+        content={{ ...information, services: selServices, ...selDateTime }}
       />
     </div>
   );

@@ -7,13 +7,16 @@ import "./confirmModal.scss";
 const ConfirmModal = ({ show, onClose, onConfirm, content }) => {
   if (!show) return null;
 
-  const services = content.selected_services
+  console.log(content);
+
+  const services = content.services
     .map((serv) => serv.name)
     .join(", ");
 
-  const durationList = content.selected_services.map(
+  const durationList = content.services.map(
     (serv) => serv.duration
   );
+
   let totalDuration = 0;
   durationList.forEach((duration) => {
     totalDuration += parseInt(duration, 10);
@@ -30,9 +33,9 @@ const ConfirmModal = ({ show, onClose, onConfirm, content }) => {
       { title: "Total duration", value: `${totalDuration} minutes` },
     ],
     datetime: [
-      { title: "Date", value: content.selected_date },
-      { title: "Time", value: content.selected_time },
-      { title: "Stylist", value: content.selected_employee },
+      { title: "Date", value: content.date },
+      { title: "Time", value: content.time },
+      { title: "Stylist", value: content.stylistName },
     ],
   };
 
