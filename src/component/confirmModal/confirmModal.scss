@@ -1,0 +1,35 @@
+@import "../../library";
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  @include element("content") {
+    padding: 20px 20px;
+    background: white;
+    width: 500px;
+    border-radius: 5px;
+  }
+
+  @include element("header") {
+    margin-bottom: 20px;
+  }
+
+  @include element("title") {
+    margin: 0;
+    text-align: start;
+    font-size: 20px;
+    font-weight: 500;
+  }
+}
+
+.field {
+    display: flex;
+}

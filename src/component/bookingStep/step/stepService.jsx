@@ -14,27 +14,29 @@ const StepService = ({ selServices, setSelServices }) => {
     });
   }, []);
 
-  const handleSelect = (id, selected) => {
+  const handleSelect = (id, name, duration, selected) => {
     if (selected === true)
-      setSelServices([...selServices, id]);
+      setSelServices([...selServices, { id, name, duration }]);
     else {
-      setSelServices(
-        selServices.filter((item) => item !== id)
-      );
+      setSelServices(selServices.filter((item) => item.id !== id));
     }
   };
   return (
     <div className="services">
-      {services.map((service) => (
-        <ServiceCard
-          key={service.id}
-          id={service.id}
-          name={service.name}
-          duration={service.duration}
-          isSelect={selServices.includes(service.id)}
-          handleSelect={handleSelect}
-        />
-      ))}
+      {services.map((service) => {
+        const idList = selServices.map((serv) => serv.id);
+
+        return (
+          <ServiceCard
+            key={service.id}
+            id={service.id}
+            name={service.name}
+            duration={service.duration}
+            isSelect={idList.includes(service.id)}
+            handleSelect={handleSelect}
+          />
+        );
+      })}
     </div>
   );
 };
