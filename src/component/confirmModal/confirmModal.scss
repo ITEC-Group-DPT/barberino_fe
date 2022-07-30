@@ -26,10 +26,49 @@
     margin: 0;
     text-align: start;
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 600;
+  }
+
+  @include element("body") {
+    margin-top: 25px;
   }
 }
 
 .field {
-    display: flex;
+  display: flex;
+  margin: 10px 0;
+
+  @include element("title") {
+    margin: 0 10px 0 0;
+    font-weight: 600;
+  }
+
+  @include element("content") {
+    margin: 0;
+    color: #563b4c;
+    text-align: start;
+  }
+}
+
+.horiLine {
+  border: none;
+  height: 1px;
+  background: #dfe0eb;
+  margin: 20px 0;
+
+  @include element("title") {
+    background: $orange;
+    height: 2px;
+  }
+}
+
+.button {
+  width: 100px;
+  @include element("cancel") {
+    background: #6c757d;
+    margin-right: 50px;
+  }
+  @include element("confirm") {
+    background: #ffc009;
+  }
 }

@@ -45,28 +45,30 @@ const ConfirmModal = ({ show, onClose, onConfirm, content }) => {
         <div className="modal__header">
           <p className="modal__title">Booking confirmation</p>
         </div>
-        <hr className="lineBreak" />
+        <hr className="horiLine horiLine__title" />
 
         <div className="modal__body">
           {Object.keys(data).map((section) => (
             <div key={section}>
               <div className="modal__body__section">
+
                 {data[section].map((field) => (
                   <div className="field" key={field.title}>
                     <p className="field__title">{`${field.title}: `}</p>
                     <p className="field__content">{field.value}</p>
                   </div>
                 ))}
+
               </div>
-              <hr className="lineBreak" />
+              <hr className="horiLine" />
             </div>
           ))}
 
           <div className="modal__footer">
-            <button type="button" onClick={onClose}>
+            <button type="button" className="button button__cancel" onClick={onClose}>
               Cancel
             </button>
-            <button type="button" onClick={onConfirm}>
+            <button type="button" className="button button__confirm" onClick={onConfirm}>
               Confirm
             </button>
           </div>
