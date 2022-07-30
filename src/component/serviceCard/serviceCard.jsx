@@ -22,7 +22,7 @@ const ServiceCard = ({
   handleSelect,
 }) => {
   const handleClick = () => {
-    handleSelect(id, !isSelect);
+    handleSelect(id, name, duration, !isSelect);
   };
 
   return (

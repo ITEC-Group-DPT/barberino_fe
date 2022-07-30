@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import React, { useState } from "react";
 import "./bookingForm.scss";
+import ConfirmModal from "component/confirmModal/confirmModal";
 import BookingHeader from "./bookingHeader";
 import BookingFooter from "./bookingFooter";
 import StepInfo from "./step/stepInfo";
@@ -14,15 +15,14 @@ const BookingStep = () => {
   const [information, setInformation] = useState();
   const [selServices, setSelServices] = useState([]);
   const [selDateTime, setSelDateTime] = useState({});
+  const [showModal, setShowModal] = useState(false);
 
   const validateStepOne = () => {
     const fields = ["email", "phone", "name"];
-
     const indexOf = fields.findIndex(
       (data) =>
         information?.[data] == null || information[data] === ""
     );
-
     return indexOf === -1;
   };
 
@@ -44,28 +44,34 @@ const BookingStep = () => {
         return;
       }
     } else if (activeStep === 2) {
-      const bookingData = {
-        ...information,
-        selected_services: JSON.stringify(selServices),
-        selected_date: selDateTime.date,
-        selected_time: selDateTime.time,
-        selected_employee: selDateTime.stylistID,
-      };
-
-      createBookingAPI(bookingData).then((response) => {
-        if (response.status === 200) {
-          if (response.data === "success") {
-            alert("Booking successfully");
-            window.location.reload();
-          } else {
-            alert("Conflicted! Please select new datetime");
-          }
-        }
-      });
+      setShowModal(true);
     }
 
     if (activeStep < stepper.length - 1)
       setActiveStep(activeStep + 1);
+  };
+
+  const handleConfirm = () => {
+    const bookingData = {
+      ...information,
+      selected_services: JSON.stringify(
+        selServices.map((serv) => serv.id)
+      ),
+      selected_date: selDateTime.date,
+      selected_time: selDateTime.time,
+      selected_employee: selDateTime.stylistID,
+    };
+
+    createBookingAPI(bookingData).then((response) => {
+      if (response.status === 200) {
+        if (response.data === "success") {
+          alert("Booking successfully");
+          window.location.reload();
+        } else {
+          alert("Conflicted! Please select new datetime");
+        }
+      }
+    });
   };
 
   const renderContent = () => {
@@ -84,7 +90,7 @@ const BookingStep = () => {
       case 2:
         return (
           <StepDateTime
-            selServices={selServices}
+            selServices={selServices.map((serv) => serv.id)}
             selDateTime={selDateTime}
             setSelDateTime={setSelDateTime}
           />
@@ -109,6 +115,13 @@ const BookingStep = () => {
         handlePrev={handlePrev}
         handleNext={handleNext}
         active={activeStep}
+      />
+
+      <ConfirmModal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        onConfirm={handleConfirm}
+        content={{ ...information, services: selServices, ...selDateTime }}
       />
     </div>
   );

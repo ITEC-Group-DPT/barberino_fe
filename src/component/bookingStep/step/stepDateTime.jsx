@@ -30,10 +30,13 @@ const StepDateTime = ({
 
         setAvailDates(res.availableDates);
         setTimeSlot(res.timeSlot);
+
+        const stylist = Object.values(res.timeSlot)[0][0];
         setSelDateTime({
           date: res.availableDates[0],
           time: Object.keys(res.timeSlot)[0],
-          stylistID: Object.values(res.timeSlot)[0][0].id,
+          stylistID: stylist.id,
+          stylistName: `${stylist.firstname} ${stylist.lastname}`,
         });
       }
     });
@@ -47,10 +50,13 @@ const StepDateTime = ({
         const res = response.data;
 
         setTimeSlot(res);
+
+        const stylist = Object.values(res)[0][0];
         setSelDateTime({
           date: val,
           time: Object.keys(res)[0],
-          stylistID: Object.values(res)[0][0].id,
+          stylistID: stylist.id,
+          stylistName: `${stylist.firstname} ${stylist.lastname}`,
         });
       }
     });
@@ -58,21 +64,27 @@ const StepDateTime = ({
 
   const handleTimeChange = (e) => {
     const val = e.target.value;
-    const newStylistID = timeSlot[e.target.value][0].id;
+    const newStylist = timeSlot[e.target.value][0];
 
     setSelDateTime({
       ...selDateTime,
       time: val,
-      stylistID: newStylistID,
+      stylistID: newStylist.id,
+      stylistName: `${newStylist.firstname} ${newStylist.lastname}`,
     });
   };
 
   const handleStylistChange = (e) => {
     const val = e.target.value;
 
+    const newStylist = timeSlot[selDateTime.time].find(
+      (styl) => styl.id === parseInt(val, 10)
+    );
+
     setSelDateTime({
       ...selDateTime,
-      stylistID: val,
+      stylistID: newStylist.id,
+      stylistName: `${newStylist.firstname} ${newStylist.lastname}`,
     });
   };
 

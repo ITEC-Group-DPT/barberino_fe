@@ -1,0 +1,74 @@
+@import "../../library";
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  @include element("content") {
+    padding: 20px 20px;
+    background: white;
+    width: 500px;
+    border-radius: 5px;
+  }
+
+  @include element("header") {
+    margin-bottom: 20px;
+  }
+
+  @include element("title") {
+    margin: 0;
+    text-align: start;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  @include element("body") {
+    margin-top: 25px;
+  }
+}
+
+.field {
+  display: flex;
+  margin: 10px 0;
+
+  @include element("title") {
+    margin: 0 10px 0 0;
+    font-weight: 600;
+  }
+
+  @include element("content") {
+    margin: 0;
+    color: #563b4c;
+    text-align: start;
+  }
+}
+
+.horiLine {
+  border: none;
+  height: 1px;
+  background: #dfe0eb;
+  margin: 20px 0;
+
+  @include element("title") {
+    background: $orange;
+    height: 2px;
+  }
+}
+
+.button {
+  width: 100px;
+  @include element("cancel") {
+    background: #6c757d;
+    margin-right: 50px;
+  }
+  @include element("confirm") {
+    background: #ffc009;
+  }
+}
