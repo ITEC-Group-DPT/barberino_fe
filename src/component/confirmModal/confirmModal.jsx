@@ -7,8 +7,6 @@ import "./confirmModal.scss";
 const ConfirmModal = ({ show, onClose, onConfirm, content }) => {
   if (!show) return null;
 
-  console.log(content);
-
   const services = content.services
     .map((serv) => serv.name)
     .join(", ");
