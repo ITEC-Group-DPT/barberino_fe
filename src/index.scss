@@ -8,6 +8,11 @@ p,
 input,
 select,
 button,
-li {
+li,
+a {
   font-family: "Poppins";
+}
+
+.link {
+  text-decoration: none;
 }

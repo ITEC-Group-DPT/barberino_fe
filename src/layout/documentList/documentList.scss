@@ -1,0 +1,16 @@
+@import "../../library";
+
+.document {
+  margin-left: 200px;
+  padding: 30px 2% 50px 2%;
+  background: #f7f8fc;
+  min-height: 100vh;
+
+  @include element("item") {
+    display: block;
+    margin-bottom: 25px;
+    color: $black;
+    text-decoration: none;
+    font-weight: 500;
+  }
+}

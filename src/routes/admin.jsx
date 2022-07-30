@@ -3,6 +3,7 @@ import { Routes, Route, Outlet } from "react-router-dom";
 import Dashboard from "layout/dashboard";
 import Authentication from "layout/authentication";
 import LeftNav from "component/leftNav/leftNav";
+import DocumentList from "layout/documentList";
 
 const WithNav = () => (
   <>
@@ -22,6 +23,7 @@ const AdminRoutes = () => {
 
       <Route element={<WithNav />}>
         <Route index element={<Dashboard />} />
+        <Route path="document" element={<DocumentList />} />
       </Route>
     </Routes>
   );

@@ -32,6 +32,7 @@
   font-size: 14px;
   padding-bottom: 5px;
   cursor: pointer;
+
   transition: 0.3s background;
 
   &:hover {
@@ -40,11 +41,16 @@
 
   @include element("title") {
     color: #a4a6b3;
+
+    @include modifier("active") {
+      color: white;
+    }
   }
 
   @include modifier("active") {
     color: white;
     background: #3e3f4a;
+    width: 100%;
   }
 }
 
