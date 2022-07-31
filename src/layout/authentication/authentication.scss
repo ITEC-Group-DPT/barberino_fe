@@ -1,0 +1,86 @@
+@import "_library.scss";
+
+.signin {
+  min-height: 100vh;
+  background: url("../../assets/bg_admin.png");
+  background-size: contain;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+
+  @include element("container") {
+    background: white;
+    width: fit-content;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+
+    padding: 40px 30px;
+  }
+  @include element("logo") {
+    width: 40px;
+    height: 40px;
+  }
+
+  @include element("subTitle") {
+    font-family: "Mulish";
+    color: #c0c2cc;
+    font-weight: 500;
+    font-size: 17px;
+  }
+
+  @include element("title") {
+    font-family: "Mulish";
+    font-weight: 600;
+    font-size: 22px;
+    margin-top: 0;
+    margin-bottom: 60px;
+  }
+
+  @include element("form") {
+    font-family: "Mulish";
+  }
+
+  @include element("field") {
+    display: block;
+    color: #9fa2b4;
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 500;
+    margin-bottom: 25px;
+    font-family: "Mulish";
+    position: relative;
+  }
+
+  @include element("input") {
+    width: 270px;
+    display: block;
+    margin-top: 10px;
+    padding: 12px 15px;
+    background-color: #fcfdfe;
+    border: 1px solid #f0f1f7;
+    border-radius: 8px;
+    outline: none;
+    font-family: "Mulish";
+  }
+
+  @include element("showPassword") {
+    position: absolute;
+    right: 10px;
+    top: calc(50% + 5px);
+  }
+
+  @include element("submit") {
+    width: 100%;
+    background-color: #3751ff;
+    font-family: "Mulish";
+    border: 0;
+    color: white;
+    padding: 12px 0px;
+    border-radius: 8px;
+    margin: 15px 0;
+    box-shadow: 0 4px 12px rgba(55, 81, 255, 24%);
+  }
+}
