@@ -1,6 +1,6 @@
 import React from "react";
 import "./leftNav.scss";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   logoIc,
   overviewIc,
@@ -19,14 +19,11 @@ const navigations = [
     title: "Services",
     icon: servicesIc,
   },
-  {
-    title: "Employees",
-    icon: employeesIc,
-  },
 ];
 
 const LeftNav = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const getClassActive = (className, path) => {
     let result = className;
@@ -40,6 +37,10 @@ const LeftNav = () => {
     return result;
   };
 
+  const onLogout = () => {
+    localStorage.removeItem("isLogin");
+    navigate("authentication", { replace: true });
+  };
   return (
     <div className="nav">
       <div className="nav__title">
@@ -67,6 +68,11 @@ const LeftNav = () => {
             <p className="item__title">{item.title}</p>
           </li>
         ))}
+
+        <li className="item" onClick={onLogout} aria-hidden>
+          <img className="icon" alt="icon" src={employeesIc} />
+          <p className="item__title">Log out</p>
+        </li>
       </ul>
     </div>
   );
